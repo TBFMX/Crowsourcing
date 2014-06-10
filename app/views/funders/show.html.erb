@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @funder.user_id %>
+</p>
+
+<p>
+  <strong>Perk:</strong>
+  <%= @funder.perk_id %>
+</p>
+
+<%= link_to 'Edit', edit_funder_path(@funder) %> |
+<%= link_to 'Back', funders_path %>

@@ -1,0 +1,45 @@
+<%= form_for(@rol) do |f| %>
+  <% if @rol.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rol.errors.count, "error") %> prohibited this rol from being saved:</h2>
+
+      <ul>
+      <% @rol.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rol_name %>
+    <%= f.text_field :rol_name %>
+  </div>
+  <div class="field">
+    <%= f.check_box :admin %>
+    <%= f.label :admin %>
+  </div>
+  <div class="field">
+    <%= f.check_box :module_1 %>
+    <%= f.label :module_1 %>
+  </div>
+  <div class="field">
+    <%= f.check_box :module_2 %>
+    <%= f.label :module_2 %>
+  </div>
+  <div class="field">
+    <%= f.check_box :module_3 %>
+    <%= f.label :module_3 %>
+  </div>
+  <div class="field">
+    <%= f.check_box :module_4 %>
+    <%= f.label :module_4 %>    
+  </div>
+  <div class="field">
+    <%= f.check_box :module_5 %>
+    <%= f.label :module_5 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

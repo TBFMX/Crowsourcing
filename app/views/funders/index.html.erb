@@ -1,0 +1,27 @@
+<h1>Listing funders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Perk</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @funders.each do |funder| %>
+      <tr>
+        <td><%= funder.user_id %></td>
+        <td><%= funder.perk_id %></td>
+        <td><%= link_to 'Show', funder %></td>
+        <td><%= link_to 'Edit', edit_funder_path(funder) %></td>
+        <td><%= link_to 'Destroy', funder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Funder', new_funder_path %>

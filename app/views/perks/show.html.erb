@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @perk.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @perk.description %>
+</p>
+
+<p>
+  <strong>Delivery date:</strong>
+  <%= @perk.delivery_date %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @perk.price %>
+</p>
+
+<p>
+  <strong>Pieces:</strong>
+  <%= @perk.pieces %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @perk.project_id %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @perk.image_id %>
+</p>
+
+<%= link_to 'Edit', edit_perk_path(@perk) %> |
+<%= link_to 'Back', perks_path %>

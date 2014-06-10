@@ -1,0 +1,26 @@
+
+<% unless User.find_by(id: session[:user_id]) %>
+<%= form_tag do %>
+	<div>
+		<%= label_tag :username, 'Name:' %>
+		<%= text_field_tag :username, params[:username] %>
+	</div>
+	<div>
+		<%= label_tag :password, 'Password:' %>
+		<%= password_field_tag :password, params[:password] %>
+	</div>
+	<div>
+		<%= submit_tag "Login" %>
+	</div>
+<% end %>
+
+	<div>
+		<%= link_to "Registrarse", users_new_url %>
+		<p><%= link_to "forgotten password?", new_password_reset_path %></p>
+		
+	</div>
+
+<% else %>
+	<p>Bienvenido <%= "#{session[:uname]}"%></p>
+	<%= button_to 'Logout', logout_path, method: :delete %>
+<%end %>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @amend.user_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @amend.description %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @amend.project_id %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @amend.image_id %>
+</p>
+
+<%= link_to 'Edit', edit_amend_path(@amend) %> |
+<%= link_to 'Back', amends_path %>
