@@ -6,9 +6,11 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+  <%= render partial: "layouts/header" %>
+  <%= render partial: "layouts/breadcrumb" %>
 <body>
-
-<%= yield %>
-
+	<div class="content"><div class="interior"><%= yield %></div></div>
 </body>
+  <%= render partial: "layouts/footer" %>
 </html>
+
