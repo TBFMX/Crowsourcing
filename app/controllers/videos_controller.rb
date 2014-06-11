@@ -25,8 +25,11 @@ class VideosController < ApplicationController
   # POST /videos
   # POST /videos.json
   def create
-    @video = Video.new(video_params)
+    @pic = params[:video][:video_url]
+    @pics = DataFile.save(@pic)
 
+
+    @video = Video.new("video_url" => @pics,"galery_id" => params[:video][:galery_id])
     respond_to do |format|
       if @video.save
         format.html { redirect_to @video, notice: 'Video was successfully created.' }

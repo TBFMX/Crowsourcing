@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :video_url %><br>
-    <%= f.text_field :video_url %>
+    <%= f.file_field :video_url %>
   </div>
   <div class="field">
     <%= f.label :galery_id %><br>
-    <%= f.number_field :galery_id %>
+    <%= f.hidden_field :galery_id %>
   </div>
   <div class="actions">
     <%= f.submit nil, class: "boton" %>
