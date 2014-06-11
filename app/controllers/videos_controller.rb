@@ -14,7 +14,8 @@ class VideosController < ApplicationController
 
   # GET /videos/new
   def new
-    @video = Video.new
+    @gallery = params[:id]
+    @video = Video.new("galery_id" => @gallery)
   end
 
   # GET /videos/1/edit

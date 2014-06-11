@@ -14,7 +14,8 @@ class GalleriesController < ApplicationController
 
   # GET /galleries/new
   def new
-    @gallery = Gallery.new
+    @project = params[:id]
+    @gallery = Gallery.new("project_id"=> @project)
   end
 
   # GET /galleries/1/edit
