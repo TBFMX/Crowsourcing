@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @image = Image.find(@project.image_id) 
   end
 
   # GET /projects/new
@@ -62,20 +63,27 @@ class ProjectsController < ApplicationController
                 respond_to do |format|
                   if @image.save
                     format.html { 
-                      #creo un nuevo perk
-                      @perk = Perk.new("project_id"=>@projects.id,"image_id" => @image.id)
-                      puts "--------------------Perk--------------------------"
-                      puts @perk.inspect
-                      puts "----------------------------------------------"
-
-                      
                       respond_to do |format|
-                        if @perk.save
-                          format.html { redirect_to edit_perk_path(@perk) }
-                          format.json {  }
+                        if @projects.update("image_id" => @image.id)
+                          format.html { 
+                            #creo un nuevo perk
+                            @perk = Perk.new("project_id"=>@projects.id)
+                            puts "--------------------Perk--------------------------"
+                            puts @perk.inspect
+                            puts "----------------------------------------------"
+
+
+                            respond_to do |format|
+                              if @perk.save
+                                format.html { redirect_to edit_perk_path(@perk) }
+                                format.json {  }
+                              end
+                            end
+                           }
+                          format.json { }
                         end
                       end
-
+                      
                     }
                     format.json { }
                   end

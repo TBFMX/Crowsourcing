@@ -1,0 +1,14 @@
+
+<p> Total: <%= @total %></p>
+<p> ID: <%= @T_id.inspect %></p>
+<p> Error: <%= @T_error %></p>
+<p> mensaje: <%=  @mensajePP %></p>
+
+<% @grid.each do |dante| %>
+<p> status: <%= dante.state %></p>
+	<p> liga: <% dante.links.each do |ss| %></p>
+		<p>  <%= ss.href %></p>
+		<p>+++++++++++++++++++++++++++++++++++++++</p>
+	<% end %>
+<p> ----------------------------------------------------------------------------</p>
+<% end %>

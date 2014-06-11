@@ -66,6 +66,63 @@ class PerksController < ApplicationController
     
   end  
 
+  def paypal
+    @perk = Perk.find(params[:id])
+
+    #falta cambiar ligas de recepcion
+
+
+    #quitar cuando acaben las pruebas flash
+    require 'paypal-sdk-rest'
+    #include  PayPal::SDK::REST
+
+  PayPal::SDK::REST.set_config(
+    :mode => "sandbox", # "sandbox" or "live"
+    :client_id => "AUsuAxDDr6_WcMNrnWkpdiKl6UoNZT9YTcT-n2Cd1BpGU386PFJaw6TBhADy",
+    :client_secret => "ENy1ehBI9RRdcP8800N5B7GZt8ZEclcxca8UYRAtZcSLGA7haQFpMdRmmceg")
+    #@pago= :params[:all]
+    @total = sprintf("%0.02f", @perk.price)
+    #@total = @cart.total_price.to_d
+    @payment = PayPal::SDK::REST::Payment.new({
+    :intent => "sale",
+    :redirect_urls => {
+        :return_url => "http://google.com",
+        :cancel_url => "http://google.com"},
+    :payer => {
+      :payment_method => "paypal"
+    },
+    :transactions => [{
+      :amount => {
+        :total => @total,
+        :currency => "MXN",
+        :details => {
+          :subtotal => @total,
+          :tax => "0.00",
+          :shipping => "0.00"}},
+      :description => @perk.description }]})
+
+    if @payment.create
+      respuesta = true  
+      @T_id = @payment.id     # Payment Id
+      session[:lastid]= @T_id
+      #puts respuesta
+      #puts  @T_id
+      get_payment_details(@T_id)
+      #execute_payment(@T_id)
+
+    else
+      respuesta = false 
+      @T_error = @payment.error  # Error Hash
+      #puts respuesta
+      #puts @T_error
+    end
+  end
+
+  def pago_paypal
+    pl_id = params[:PayerID]
+    execute_payment(session[:lastid],pl_id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_perk
@@ -76,4 +133,47 @@ class PerksController < ApplicationController
     def perk_params
       params.require(:perk).permit(:title, :description, :delivery_date, :price, :pieces, :project_id, :image_id)
     end
+
+    #metodos para paypal
+    def get_notification(mp,trans_id)
+    paymentInfo = mp.get_payment_info(trans_id)
+
+  return paymentInfo
+  end
+
+  def get_payment_details(pp_id)
+    # Fetch Payment
+  payment = Payment.find(pp_id)
+
+  # Get List of Payments
+  payment_history = Payment.all( :count => 1 )
+  @grid = payment_history.payments #<--para grid
+
+  @ligas = Array.new
+  contador = 0
+
+  @grid.each do |dante|
+
+    dante.links.each do |kalos|
+      @ligas[contador] = kalos.href
+      contador += 1
+    end
+  end
+  @ligapp = @ligas[1]
+
+  redirect_to @ligapp
+  end
+
+  def execute_payment(pp_id,pl_id)
+    payment = Payment.find(pp_id)
+
+  if payment.execute( :payer_id => pl_id )
+    # Success Message
+    @mensajePP = "el pago se realizo con exito"
+  else
+    @mensajePP = payment.error # Error Hash
+  end
+  end 
+  #terminan metodos de paypal
+
 end

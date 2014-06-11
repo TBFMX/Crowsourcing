@@ -40,4 +40,5 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'exception_notification'
 gem "breadcrumbs_on_rails"
+gem 'paypal-sdk-rest'
 

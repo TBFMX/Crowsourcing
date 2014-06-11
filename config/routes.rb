@@ -52,6 +52,11 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
 
   post 'projects/uploadFile', as: 'uploadFile'
+
+  controller :perks do
+    get 'pagos/paypal/:id' => :paypal
+    post 'pagos/paypal' => :paypal
+  end
   
 
   # The priority is based upon order of creation: first created -> highest priority.

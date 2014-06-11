@@ -3,10 +3,12 @@ class DataFile < ActiveRecord::Base
 	def self.save(upload)
 	    name =  upload.original_filename
 	    directory = "public/data"
+	    dir ="/data"
 	    # create the file path
 	    path = File.join(directory, name)
+	    path2 = File.join(dir, name)
 	    # write the file
 	    File.open(path, "wb") { |f| f.write(upload.read) }
-	    return path
+	    return path2
 	end
 end
