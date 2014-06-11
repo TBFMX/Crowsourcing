@@ -51,6 +51,7 @@ Rails.application.routes.draw do
 
   get 'sessions/destroy'
 
+  post 'projects/uploadFile', as: 'uploadFile'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

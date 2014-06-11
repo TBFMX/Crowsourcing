@@ -16,6 +16,10 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
+  </div> 
+  <div class="field">
     <%= f.label :monetary_goal %><br>
     <%= f.text_field :monetary_goal %>
   </div>
@@ -31,3 +35,12 @@
     <%= f.submit nil, class: "boton" %>
   </div>
 <% end %>
+<%= form_tag({:action => 'uploadFile'}, {:multipart => true}) do %>
+ <div class="field">
+    <%= label_tag 'imagen' %><br>
+    <%= file_field 'upload', 'datafile' %>
+  </div>
+  <%= submit_tag nil, class: "boton" %>
+ <% end %> 
+
+

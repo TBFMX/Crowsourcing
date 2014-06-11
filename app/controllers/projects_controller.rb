@@ -25,7 +25,17 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-    @pic = params[:image]
+     @pic = params[:project][:image]
+    puts "-------------------Pic---------------------------"
+      puts @pic.inspect
+     puts "----------------------------------------------"
+
+    #unless params[:image].nil?
+      @pics = DataFile.save(@pic)
+    #end
+        puts "-------------------Pics---------------------------"
+      puts @pics.inspect
+     puts "----------------------------------------------" 
     respond_to do |format|
       if @project.save
         format.html { 
@@ -34,11 +44,7 @@ class ProjectsController < ApplicationController
           puts "-------------------Proyecto---------------------------"
           puts @projects.inspect
           puts "----------------------------------------------"
-          #creo un nuevo perk
-          @perk = Perk.new("project_id"=>@projects.id)
-          puts "--------------------Perk--------------------------"
-          puts @perk.inspect
-          puts "----------------------------------------------"
+          
           #creo la galleria
           @gallery=Gallery.new("project_id"=>@projects.id)
           puts "--------------------Galleria--------------------------"
@@ -48,16 +54,33 @@ class ProjectsController < ApplicationController
             if @gallery.save
               format.html {
                 @galleries = Gallery.find(@gallery)
-                @image = Image.new("gallery_id" => @galleries.id)
+                @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
                 puts "--------------------Imagen--------------------------"
                 puts @image.inspect
                 puts "----------------------------------------------"
+                
                 respond_to do |format|
                   if @image.save
-                    format.html { }
+                    format.html { 
+                      #creo un nuevo perk
+                      @perk = Perk.new("project_id"=>@projects.id,"image_id" => @image.id)
+                      puts "--------------------Perk--------------------------"
+                      puts @perk.inspect
+                      puts "----------------------------------------------"
+
+                      
+                      respond_to do |format|
+                        if @perk.save
+                          format.html { redirect_to edit_perk_path(@perk) }
+                          format.json {  }
+                        end
+                      end
+
+                    }
                     format.json { }
                   end
                 end
+
 
 
                }
@@ -66,13 +89,7 @@ class ProjectsController < ApplicationController
           end
 
 
-          respond_to do |format|
-            if @perk.save
-              format.html { redirect_to edit_perk_path(@perk) }
-              format.json {  }
-            end
-          end
-
+          
           }
         format.json { render :show, status: :created, location: @project }
       else
@@ -80,6 +97,11 @@ class ProjectsController < ApplicationController
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def uploadFile
+    post = DataFile.save(params[:upload])
+    render :text => "File has been uploaded successfully"
   end
 
   # PATCH/PUT /projects/1
@@ -114,6 +136,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :monetary_goal, :init_date, :finish_date,:image)
+      params.require(:project).permit(:name, :monetary_goal, :init_date, :finish_date)
     end
 end

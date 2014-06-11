@@ -1,5 +1,5 @@
 class PerksController < ApplicationController
-  before_action :set_perk, only: [:show, :edit, :update, :destroy]
+  before_action :set_perk, only: [:show, :edit, :update, :destroy,:prosses_pay]
 
   # GET /perks
   # GET /perks.json
@@ -60,6 +60,11 @@ class PerksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  #prosses_pay/1
+  def prosses_pay
+    
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
