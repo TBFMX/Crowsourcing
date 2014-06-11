@@ -62,6 +62,10 @@ Rails.application.routes.draw do
     get 'images/new/:id' => :new
     post 'images/new/:id' => :new
   end  
+  controller :amends do
+    get 'amends/new/:id' => :new
+    post 'amends/new/:id' => :new
+  end  
   
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -14,7 +14,9 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @project = params[:project]
+    @user = session[:user_id]
+    @comment = Comment.new("project_id" => @project, "user_id"=> @user)
   end
 
   # GET /comments/1/edit

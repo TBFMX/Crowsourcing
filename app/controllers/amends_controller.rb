@@ -15,6 +15,8 @@ class AmendsController < ApplicationController
   # GET /amends/new
   def new
     @amend = Amend.new
+    @project = params[:project]
+    @user = session[:user_id]
   end
 
   # GET /amends/1/edit
@@ -24,17 +26,30 @@ class AmendsController < ApplicationController
   # POST /amends
   # POST /amends.json
   def create
-    @amend = Amend.new(amend_params)
-
+    @project = params[:amends][:project]
+    @user = params[:amends][:user]
+    @pic = params[:amends][:image]
+    @gallery = Gallery.where("project_id = ?",@project)
+    
+    #unless params[:image].nil?
+      @pics = DataFile.save(@pic)
+    #end
+    @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
+    
     respond_to do |format|
-      if @amend.save
-        format.html { redirect_to @amend, notice: 'Amend was successfully created.' }
-        format.json { render :show, status: :created, location: @amend }
-      else
-        format.html { render :new }
-        format.json { render json: @amend.errors, status: :unprocessable_entity }
-      end
-    end
+      if @image.save
+        format.html { 
+          @amend = Amend.new("user_id"=>@user, "project_id" => @project, "description" => params[:amend][:description], "image_url" => @image)
+          respond_to do |format|
+            if @amend.save
+              format.html { redirect_to @amend, notice: 'Amend was successfully created.' }
+              format.json { render :show, status: :created, location: @amend }
+            else
+              format.html { render :new }
+              format.json { render json: @amend.errors, status: :unprocessable_entity }
+            end
+          end
+        }
   end
 
   # PATCH/PUT /amends/1

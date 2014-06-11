@@ -204,8 +204,9 @@ class PerksController < ApplicationController
   #terminan metodos de paypal
 
   #creador de funders
-  def create_founder(user,perk)
-    @funder = Funder.new("user_id" => user, "perk_id" =>perk)
+  def create_founder(perk)
+    @user = session[:user_id]
+    @funder = Funder.new("user_id" => @user, "perk_id" =>perk)
     @project = Project.where("perk_id = ?", perk)
 
     respond_to do |format|
