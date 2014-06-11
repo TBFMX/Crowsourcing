@@ -57,6 +57,11 @@ Rails.application.routes.draw do
     get 'pagos/paypal/:id' => :paypal
     post 'pagos/paypal' => :paypal
   end
+
+  controller :images do
+    get 'images/new/:id' => :new
+    post 'images/new/:id' => :new
+  end  
   
 
   # The priority is based upon order of creation: first created -> highest priority.

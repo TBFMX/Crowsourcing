@@ -10,6 +10,8 @@ class FundersController < ApplicationController
   # GET /funders/1
   # GET /funders/1.json
   def show
+    @user = User.find(@funder.user_id)
+    @perk = Perk.find(@funder.perk_id)
   end
 
   # GET /funders/new

@@ -40,16 +40,38 @@ class PerksController < ApplicationController
   # PATCH/PUT /perks/1
   # PATCH/PUT /perks/1.json
   def update
+    #recupero datos
+    @pic = params[:perk][:image]
+    @project = params[:perk][:project_id]
+    @gallery = Gallery.where("project_id = ?",@project)
+    puts "-------------------Pic---------------------------"
+      puts @pic.inspect
+    puts "-------------------------------------------------"
+    #unless params[:image].nil?
+      @pics = DataFile.save(@pic)
+    #end
+    @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
+    puts "--------------------Imagen--------------------------"
+    puts @image.inspect
+    puts "----------------------------------------------"
+    
     respond_to do |format|
-      if @perk.update(perk_params)
-        format.html { redirect_to @perk, notice: 'Perk was successfully updated.' }
-        format.json { render :show, status: :ok, location: @perk }
-      else
-        format.html { render :edit }
-        format.json { render json: @perk.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+      if @image.save
+        format.html { 
+                  respond_to do |format|
+                    if @perk.update(perk_params)
+                      format.html { redirect_to @perk, notice: 'Perk was successfully updated.' }
+                      format.json { render :show, status: :ok, location: @perk }
+                    else
+                      format.html { render :edit }
+                      format.json { render json: @perk.errors, status: :unprocessable_entity }
+                    end
+                  end
+                }
+                format.json { }
+            end
+          end
+     end
 
   # DELETE /perks/1
   # DELETE /perks/1.json
@@ -136,44 +158,65 @@ class PerksController < ApplicationController
 
     #metodos para paypal
     def get_notification(mp,trans_id)
-    paymentInfo = mp.get_payment_info(trans_id)
+      paymentInfo = mp.get_payment_info(trans_id)
 
-  return paymentInfo
-  end
+      return paymentInfo
+    end
 
   def get_payment_details(pp_id)
     # Fetch Payment
-  payment = Payment.find(pp_id)
+    payment = Payment.find(pp_id)
 
-  # Get List of Payments
-  payment_history = Payment.all( :count => 1 )
-  @grid = payment_history.payments #<--para grid
+    # Get List of Payments
+    payment_history = Payment.all( :count => 1 )
+    @grid = payment_history.payments #<--para grid
 
-  @ligas = Array.new
-  contador = 0
+    @ligas = Array.new
+    contador = 0
 
-  @grid.each do |dante|
+    @grid.each do |dante|
 
-    dante.links.each do |kalos|
-      @ligas[contador] = kalos.href
-      contador += 1
+      dante.links.each do |kalos|
+        @ligas[contador] = kalos.href
+        contador += 1
+      end
     end
-  end
-  @ligapp = @ligas[1]
+    @ligapp = @ligas[1]
 
-  redirect_to @ligapp
+    redirect_to @ligapp
   end
 
   def execute_payment(pp_id,pl_id)
     payment = Payment.find(pp_id)
 
-  if payment.execute( :payer_id => pl_id )
-    # Success Message
-    @mensajePP = "el pago se realizo con exito"
-  else
-    @mensajePP = payment.error # Error Hash
-  end
+    if payment.execute( :payer_id => pl_id )
+      # Success Message
+      @mensajePP = "el pago se realizo con exito"
+
+      #creamos el founder
+
+
+
+    else
+      @mensajePP = payment.error # Error Hash
+    end
   end 
   #terminan metodos de paypal
+
+  #creador de funders
+  def create_founder(user,perk)
+    @funder = Funder.new("user_id" => user, "perk_id" =>perk)
+    @project = Project.where("perk_id = ?", perk)
+
+    respond_to do |format|
+      if @funder.save
+        format.html { redirect_to @project}
+        format.json { render :show, status: :created, location: @funder }
+      else
+        format.html { render :new }
+        format.json { render json: @funder.errors, status: :unprocessable_entity }
+      end
+    end
+  end 
 
 end

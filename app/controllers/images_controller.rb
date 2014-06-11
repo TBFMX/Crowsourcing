@@ -14,7 +14,7 @@ class ImagesController < ApplicationController
 
   # GET /images/new
   def new
-    @image = Image.new
+    @image = Image.new("galery_id" => params[:id])
   end
 
   # GET /images/1/edit
@@ -24,7 +24,11 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
-    @image = Image.new(image_params)
+    
+
+    @pic = params[:image][:image_url]
+    @pics = DataFile.save(@pic)
+    @image = Image.new("image_url" => params[:image_url], "galery_id" => params[:galery_id])
 
     respond_to do |format|
       if @image.save
