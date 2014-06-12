@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
 
-  protect_from_forgery with: :exception
   before_action :authorize
 
   add_breadcrumb I18n.t("breadcrumbs.homepage"), :root_path
@@ -93,6 +92,12 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = :es || I18n.default_locale
   end
+
+  def check_exist(var)
+    unless var.present?
+      redirect_to root_path
+    end
+  end  
  
 
   protected

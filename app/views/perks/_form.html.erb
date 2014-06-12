@@ -35,6 +35,12 @@
     <%= f.label :image_id %><br>
     <%= f.file_field :image_id %>
   </div>
+  <div class="field">
+    <%= f.label :gallery_id %><br>
+    <% gallery_array = Gallery.where("project_id = ?",@project).map { |city| [city.title, city.id] } %>
+    <%= select_tag("gallery_id",options_for_select(gallery_array) ) %>
+    <%#= select("perk", "gallery_id", Gallery.all.collect {|p| [ p.title, p.id ] }, {include_blank: 'Seleccione uno'}) %>
+  </div>
   <div class="actions">
     <%= f.submit nil, class: "boton" %>
   </div>

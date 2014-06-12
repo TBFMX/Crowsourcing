@@ -1,5 +1,8 @@
 class PerksController < ApplicationController
   before_action :set_perk, only: [:show, :edit, :update, :destroy,:prosses_pay]
+    #quitar cuando acaben las pruebas flash
+    require 'paypal-sdk-rest'
+    #include  PayPal::SDK::REST
 
   # GET /perks
   # GET /perks.json
@@ -14,11 +17,18 @@ class PerksController < ApplicationController
 
   # GET /perks/new
   def new
+    @project = params[:proy]
     @perk = Perk.new
+    @gallery = Gallery.where("project_id = ?",@project)
   end
 
   # GET /perks/1/edit
   def edit
+    @project = params[:proy]
+    @gallery = Gallery.where("project_id = ?",@project)
+        puts "-------------------galeria---------------------------"
+      puts @gallery.inspect
+    puts "-------------------------------------------------"
   end
 
   # POST /perks
@@ -41,16 +51,18 @@ class PerksController < ApplicationController
   # PATCH/PUT /perks/1.json
   def update
     #recupero datos
-    @pic = params[:perk][:image]
+    @pic = params[:perk][:image_id]
     @project = params[:perk][:project_id]
-    @gallery = Gallery.where("project_id = ?",@project)
+    @gallery = params[:perk][:galery_id]
     puts "-------------------Pic---------------------------"
-      puts @pic.inspect
+      puts @gallery.inspect
     puts "-------------------------------------------------"
-    #unless params[:image].nil?
+    unless @pic.nil?
       @pics = DataFile.save(@pic)
-    #end
-    @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
+    else
+      @pics = " "  
+    end
+    @image = Image.new("galery_id" => @gallery, "image_url" => @pics)
     puts "--------------------Imagen--------------------------"
     puts @image.inspect
     puts "----------------------------------------------"
@@ -59,7 +71,7 @@ class PerksController < ApplicationController
       if @image.save
         format.html { 
                   respond_to do |format|
-                    if @perk.update(perk_params)
+                    if @perk.update(params[:perk][:title], [:perk][:title][:description], [:perk][:title][:delivery_date], [:perk][:title][:price], [:perk][:title][:pieces], [:perk][:title][:project_id], @image.id)
                       format.html { redirect_to @perk, notice: 'Perk was successfully updated.' }
                       format.json { render :show, status: :ok, location: @perk }
                     else
@@ -94,9 +106,6 @@ class PerksController < ApplicationController
     #falta cambiar ligas de recepcion
 
 
-    #quitar cuando acaben las pruebas flash
-    require 'paypal-sdk-rest'
-    #include  PayPal::SDK::REST
 
   PayPal::SDK::REST.set_config(
     :mode => "sandbox", # "sandbox" or "live"
@@ -129,7 +138,14 @@ class PerksController < ApplicationController
       session[:lastid]= @T_id
       #puts respuesta
       #puts  @T_id
+      #######################################################################################################################
       get_payment_details(@T_id)
+      
+
+
+
+
+      ########################################################################################################################
       #execute_payment(@T_id)
 
     else
@@ -165,10 +181,10 @@ class PerksController < ApplicationController
 
   def get_payment_details(pp_id)
     # Fetch Payment
-    payment = Payment.find(pp_id)
+    payment = PayPal::SDK::REST::Payment.find(pp_id)
 
     # Get List of Payments
-    payment_history = Payment.all( :count => 1 )
+    payment_history = PayPal::SDK::REST::Payment.all( :count => 1 )
     @grid = payment_history.payments #<--para grid
 
     @ligas = Array.new
@@ -194,7 +210,7 @@ class PerksController < ApplicationController
       @mensajePP = "el pago se realizo con exito"
 
       #creamos el founder
-
+      #create_founder(perk)
 
 
     else

@@ -61,24 +61,39 @@ Rails.application.routes.draw do
   controller :galleries do
     get 'galleries/new/:id' => :new
     post 'galleries/new/:id' => :new
+    get 'galleries/:id/edit/:proy' => :new
+    post 'galleries/:id/edit/:proy' => :new
   end  
   controller :amends do
     get 'amends/new/:id' => :new
     post 'amends/new/:id' => :new
+    get 'amends/:id/edit/:proy' => :new
+    post 'amends/:id/edit/:proy' => :new
   end  
   controller :videos do
     get 'videos/new/:id' => :new
     post 'videos/new/:id' => :new
+    get 'videos/:id/edit/:proy' => :new
+    post 'videos/:id/edit/:proy' => :new
   end  
   controller :images do
     get 'images/new/:id' => :new
     post 'images/new/:id' => :new
+    get 'images/:id/edit/:proy' => :edit
+    post 'images/:id/edit/:proy' => :edit
   end
   controller :comments do
     get 'comments/new/:id' => :new
     post 'comments/new/:id' => :new
+    get 'comments/:id/edit/:proy' => :edit
+    post 'comments/:id/edit/:proy' => :edit
   end   
-  
+  controller :perks do
+    get 'perks/new/:id' => :new
+    post 'perks/new/:id' => :new
+    get 'perks/:id/edit/:proy' => :edit
+    post 'perks/:id/edit/:proy' => :edit
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
