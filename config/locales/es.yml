@@ -9,7 +9,11 @@ es:
     ino316: Arandelas de Acero Inoxidable 316L
     ino254: Arandelas de Acero Inoxidable 245 SMO
     especiales: Arandelas Especiales
-
+    comments: 'Comentarios'
+    users: 'User'
+    amends: 'Actualizaciones'
+    galleries: 'Galerias'
+    
 
   activerecord:
       attributes:
@@ -18,6 +22,31 @@ es:
           password: 'Contraseña'
           email: 'Correo Electronico'
           password_confirmation: 'Confirmacion De Contraseña'
+          name: 'Nombre'
+        perk:
+          title: 'Titulo'
+          description: 'Descripcion'
+          delivery_date: 'Fecha De Entrega'
+          price: 'Precio'
+          piece: 'Piezas'
+        project:
+          name: 'Nombre'
+          monetary_goal: 'Meta'
+          init_date: 'Fecha De Inicio'
+          finish_date: 'Fechas de Vencimiento'
+        gallery:
+          title: 'Titulo'
+          description: 'Descripcion'
+        image:
+          image_url: 'Imagen'
+        video:
+          video_url: 'Video'
+        amend:
+          description: 'Descripcion'
+          imagen_id: 'Imagen'
+        comments:
+          comments: 'Comentario'
+
  
   date:
     abbr_day_names:

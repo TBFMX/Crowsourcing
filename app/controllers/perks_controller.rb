@@ -15,14 +15,14 @@ class PerksController < ApplicationController
   def show
   end
 
-  # GET /perks/new
+  # GET /perks/new/proyecto_id
   def new
-    @project = params[:proy]
+    @project = params[:id]
     @perk = Perk.new
     @gallery = Gallery.where("project_id = ?",@project)
   end
 
-  # GET /perks/1/edit
+  # GET /perks/1/edit/proyecto_id
   def edit
     @project = params[:proy]
     @gallery = Gallery.where("project_id = ?",@project)
