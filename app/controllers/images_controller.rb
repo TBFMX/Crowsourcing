@@ -1,10 +1,13 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
-  # GET /images
+  # GET galleries/images/1
   # GET /images.json
   def index
-    @images = Image.all
+    if params[:id].nil?
+      redirect_to root_path
+    end  
+    @images = Image.where("galery_id" => params[:id])
   end
 
   # GET /images/1
@@ -12,20 +15,21 @@ class ImagesController < ApplicationController
   def show
   end
 
-  # GET /images/new
+  # GET /images/new/galleria_id
   def new
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/images/new/#{params[:id]}'
     @image = Image.new("galery_id" => params[:id])
   end
 
-  # GET /images/1/edit
+  # GET /images/1/edit/
+=begin  
   def edit
+      
   end
-
+=end
   # POST /images
   # POST /images.json
   def create
-    
-
     @pic = params[:image][:image_url]
     @pics = DataFile.save(@pic)
     @image = Image.new("image_url" => params[:image_url], "galery_id" => params[:galery_id])

@@ -12,14 +12,17 @@ class GalleriesController < ApplicationController
   def show
   end
 
-  # GET /galleries/new
+  # GET /galleries/new/:id
   def new
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/galleries/new/#{params[:id]}'
     @project = params[:id]
     @gallery = Gallery.new("project_id"=> @project)
   end
 
-  # GET /galleries/1/edit
+  # GET /galleries/1/edit/proyecto_id
   def edit
+      add_breadcrumb I18n.t("breadcrumbs.amends"), '/galleries/#{params[:id]}/edit/#{params[:proy]}'
+      @project = params[:proy]
   end
 
   # POST /galleries

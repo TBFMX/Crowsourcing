@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
+  add_breadcrumb I18n.t("breadcrumbs.comments"), comments_path
   # GET /comments
   # GET /comments.json
   def index
@@ -12,20 +12,23 @@ class CommentsController < ApplicationController
   def show
   end
 
-  # GET /comments/new
+  # GET /comments/new/proyecto_id
   def new
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/comments/new/#{params[:project]}'
     @project = params[:id]
     @user = session[:user_id]
     @comment = Comment.new("project_id" => @project, "user_id"=> @user)
   end
 
-  # GET /comments/1/edit
+  # GET /comments/1/edit/proyecto_id
   def edit
+        @project = params[:proy]
   end
 
   # POST /comments
   # POST /comments.json
   def create
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/comments/#{params[:id]/amends/#{params[:proy]}'
     @comment = Comment.new(comment_params)
 
     respond_to do |format|

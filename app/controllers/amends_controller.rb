@@ -1,6 +1,6 @@
 class AmendsController < ApplicationController
   before_action :set_amend, only: [:show, :edit, :update, :destroy]
-
+  #add_breadcrumb I18n.t("breadcrumbs.amends"), amends_path()
   # GET /amends
   # GET /amends.json
   def index
@@ -10,17 +10,22 @@ class AmendsController < ApplicationController
   # GET /amends/1
   # GET /amends/1.json
   def show
+      add_breadcrumb I18n.t("breadcrumbs.amends"), amends_path(@amend)
   end
 
-  # GET /amends/new
+  # GET /amends/new/proyecto_id
   def new
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/amends/new/#{params[:project]}'
     @amend = Amend.new
+    #@project = params[:proy]
     @project = params[:project]
     @user = session[:user_id]
   end
 
-  # GET /amends/1/edit
+  # GET /amends/1/edit/proyecto_id
   def edit
+      add_breadcrumb I18n.t("breadcrumbs.amends"), '/amends/#{params[:id]/amends/#{params[:proy]}'
+      @project = params[:proy]
   end
 
   # POST /amends

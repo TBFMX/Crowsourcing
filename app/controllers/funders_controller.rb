@@ -1,31 +1,32 @@
 class FundersController < ApplicationController
   before_action :set_funder, only: [:show, :edit, :update, :destroy]
-
+=begin
   # GET /funders
   # GET /funders.json
   def index
     @funders = Funder.all
   end
-
+=end
   # GET /funders/1
   # GET /funders/1.json
   def show
     @user = User.find(@funder.user_id)
     @perk = Perk.find(@funder.perk_id)
   end
-
-  # GET /funders/new
-  def new
+=begin
+  # GET /funders/new/proyecto_id
+  def new 
     @funder = Funder.new
   end
 
-  # GET /funders/1/edit
+  # GET /funders/1/edit/proyecto_id
   def edit
+        @project = params[:proy]
   end
 
   # POST /funders
   # POST /funders.json
-  def create
+  def create   
     @funder = Funder.new(funder_params)
 
     respond_to do |format|
@@ -73,4 +74,5 @@ class FundersController < ApplicationController
     def funder_params
       params.require(:funder).permit(:user_id, :perk_id)
     end
+=end    
 end
