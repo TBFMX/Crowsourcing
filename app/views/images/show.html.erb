@@ -1,14 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Image url:</strong>
-  <%= @image.image_url %>
-</p>
-
-<p>
-  <strong>Galery:</strong>
-  <%= @image.galery_id %>
-</p>
+<div class="show_images">
+	<div class="ruta"><strong>Imagen</strong></div>
+	<div class="imagen"><img src="<%= @image.image_url %>"></div>
+</div>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>

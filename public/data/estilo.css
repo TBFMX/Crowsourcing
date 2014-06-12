@@ -1,0 +1,631 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400);
+
+/*--Cuerpo-----------------------------------------------------*/
+
+body{
+	background-color: #F2F2F2;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+/*--banner-----------------------------------------------------*/
+
+.banner{ 					/* Contenedor de todo el banner*/
+	width: 960px;
+	height: 80px;
+	font-size: 13px;
+	font-weight: 300;
+	margin:0 auto 0 auto;
+	text-align: center;
+	font-family:Arial, Helvetica, sans-serif;	
+}
+
+	.logo{						/* Seccion del logo*/
+		display:table-cell;
+		float: left;
+		width: 480px;
+		height: 80px;
+		vertical-align: middle;
+		text-align:left;
+	}
+
+	.buscador{							/* Contenedor de todo el buscador*/
+		float: right;
+		width: 480px;
+		height: 35px;
+		text-align:right;
+	}
+
+		.buscador .texto{ 
+		   font-size: 15px; 
+		   font-family: Arial, san-serif;
+		   width: 300px;
+		   border: 1px solid;
+		   -moz-border-radius: 5px; 
+		   -webkit-border-radius: 5px; 
+		   border-radius: 5px;
+		   margin-bottom: 25px; 
+		   padding: 5px;   
+		} 
+
+		.buscador .texto:focus{ 
+		   background-color: #E5E6E7;  
+		} 
+	 
+		.boton_busqueda{
+
+		}
+
+	.contenedor_menu_banner{					/* Contenedor del menu*/
+		float: right;
+		display:table;
+		width: 480px;
+		height: 30px;
+	}
+
+		.menu_banner{
+			display:table-cell;
+			vertical-align: middle;
+			width: 110px;
+			height: 26px;
+			border: 2px solid;	
+			background-color: #66DDFF;	
+			border-color: #FFFFFF;		
+		}
+
+			.menu_banner:hover{
+				background: #A6B3B3;
+			}
+
+			.menu_banner a:link { /* Link no visitado*/
+				text-decoration:none; 
+				color: #FFFFFF;
+				} 
+
+			.menu_banner a:visited { /*Link visitado*/
+				text-decoration:none; 
+				color:#FFFFFF;
+				} 
+
+			.menu_banner a:active {/*Link activo*/
+				text-decoration:none; 
+				color:#FFFFFF; 
+				background:#A6B3B3;
+				} 
+
+			.menu_banner a:hover { /*Mause sobre el link*/
+				text-decoration:underline; 
+				color:#FFFFFF; 
+				} 
+
+/*--Footer-----------------------------------------------------*/
+
+.footer{ 
+	margin:0 auto 0 auto;
+	text-align: center;
+	width: 960px; 
+	height: 40px; 
+	background-color: #FFFFFF;
+	font-family:Arial, Helvetica, sans-serif;	
+	}
+
+	.sub_footer{
+		float: left;
+		text-align: center;
+		color: #A6B3B3;
+		width: 240px;
+		height: 40px;
+		margin-top: 10px;
+	}
+
+	.sub_footer a{
+		font-weight: bold;
+		text-decoration: none;
+		color: #A6B3B3;
+	}
+
+
+
+/*--contenido_generico-----------------------------------------------------*/
+
+.contenido{
+	width: 960px;
+	padding-top: 10px;	
+	margin:0 auto 0 auto;
+	background-color: #FFFFFF;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.slideshow{
+	width: 960px;
+	height: 388px;
+}
+
+.slideshow_fijo{
+	width: 960px;
+	height: 350px;
+	margin:0 auto 0 auto;	
+	background-color:#66DDFF; 
+}
+/*--contenido index-----------------------------------------------------*/
+
+
+	.contenido .modulos{
+		width: 470px;
+		height: 400px;
+		float: left;
+		border: 5px;
+		border-style: solid;	
+		border-color: #F2F2F2;	
+		background-color: #ffffff;
+		text-align: center;		
+	}
+
+		.contenido .modulos .titulo{
+			width: 100%;			
+			height: 50px;	
+			font-size: 36px;
+			font-weight: 900;
+			color:#666666;	
+			padding-top: 10px;			
+		}
+
+		.contenido .modulos .imagen{	
+			margin-top: 50px;
+			width: 470px;				
+			height: 140px;
+		}
+
+		.contenido .modulos .descripcion{	
+			display: block;
+			font-size: 14px;	
+			text-align: left;
+			color: #A6B3B3;				
+			width: 430px;				
+			height: 80px;
+			margin: 15px;
+		}
+
+		.contenido .modulos .descripcion hr{				
+			width: 100%;				
+			height: 1px;
+			border: 1px;
+			border-style: solid;
+			border-color: #A6B3B3;	
+			background-color: #A6B3B3;	
+		}		
+
+		.contenido .modulos .boton{	
+			vertical-align: middle;	
+			font-size: 13px;
+			font-weight: 900;
+			margin-left: 195px;
+			padding-top: 5px;
+			width: 70px;
+			height: 20px;
+			border: 2px solid;	
+			border-radius: 5px;	
+			color: #FFFFFF;	
+			background-color: #66DDFF;	
+			border-color: #66DDFF;
+			margin:0 auto 0 auto;
+		}
+
+			.contenido .modulos .boton:hover{
+					background: #A6B3B3;
+					border-color: #A6B3B3;
+				}
+
+			.contenido .modulos .boton a{ /* Link no visitado*/
+					text-decoration:none; 
+					color: #FFFFFF;
+					} 				
+
+			.contenido .modulos .boton a:link { /* Link no visitado*/
+					text-decoration:none; 
+					} 
+
+			.contenido .modulos .boton a:visited { /*Link visitado*/
+					text-decoration:none; 
+					} 
+
+			.contenido .modulos .boton a:active {/*Link activo*/
+					text-decoration:none; 
+					background:#A6B3B3;
+					} 
+
+			.contenido .modulos .boton a:hover { /*Mause sobre el link*/
+					text-decoration:underline; 
+					} 
+	
+
+/*-----forma--------------------------------*/
+
+	.contact-form { 
+		width: 470px;
+		height: 400px;
+		float: left;
+		border: 5px;
+		border-style: solid;		
+	   	border-color: #f2f2f2;
+	   	background-color: #a6b3b3;
+	   	text-align: center;
+	   	font-family:Arial, Helvetica, sans-serif;	
+	}
+
+		.tituloforma{
+			width: 100%;			
+			height: 50px;	
+			font-size: 36px;
+			font-weight: 900;
+			color:#FFFFFF;	
+			padding-top: 10px;
+		}
+
+		.contact-form input,     
+		.contact-form textarea,   
+		.contact-form label { 
+		   font-size: 15px; 
+		   margin-bottom: 2px;
+		   font-family: Arial, sans-serif;		   
+		} 
+  
+		.contact-form label {
+		   width: 160px;
+		   float: left;
+		   text-align: right;
+		   color:#FFFFFF;
+		   margin-left: 10px;	
+		}
+
+		.contact-form #name, 
+		.contact-form #email,  
+		.contact-form #empresa,  
+		.contact-form #telefono,   
+		.contact-form #pais, 
+		.contact-form #cp, 		
+		.contact-form #comentarios, 								  
+		.contact-form textarea { 
+		   width: 250px;
+		   background: #fff;
+		   border: 0;
+		   -moz-border-radius: 5px; 
+		   -webkit-border-radius: 5px; 
+		   border-radius: 5px;
+		   margin-bottom: 10px; 
+		   padding: 3px; 
+		} 	
+
+		.contact-form input:focus,     
+		.contact-form textarea:focus { 
+		   background-color: #E5E6E7;
+		} 
+		 
+		.contact-form textarea { 
+		   height: 50px;   
+		} 
+		 
+		.contact-form .boton { 	
+			font-size: 13px;
+			font-weight: 900;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			width: 180px;
+			height: 30px;
+			border: 2px solid;	
+			border-radius: 5px;	
+			color: #FFFFFF;	
+			background-color: #66DDFF;	
+			border-color: #66DDFF;
+			margin:0 auto 0 auto;
+		} 
+		 
+		.contact-form .boton:hover { 
+			background: #666666;
+			border-color: #666666;		  
+		}
+		 
+		.contact-form .nota{
+			margin-left: 20px;
+			width: 450px;
+			color: #FFFFFF;  
+			padding-top: 10px;
+
+		}
+
+		.contact-form .required { 
+			width: 460px;
+		   font-weight:normal; 
+		   color: #66DDFF;     
+		}	
+				
+
+/*-------Estilo Pagina nosotros--------------------------------*/
+
+.seccion{		
+	padding: 20px;		
+	width: 920px;	
+	height: 400px;
+	margin:0 auto 0 auto;
+	background-color: #ffffff;
+	border-top: 10px;
+	border-color:#f2f2f2;
+	border-style: solid;
+	text-align: center;
+}
+
+	.seccion .contenido_izquierdo{	
+		width: 460px;
+		height: 400px;	
+		float: left;	
+	}
+
+		.seccion .contenido_izquierdo .titulo{
+			width: 100%;			
+			height: 45px;	
+			font-size: 36px;
+			font-weight: 900;
+			color:#666666;
+			text-align: left;
+		}
+
+		.seccion .contenido_izquierdo hr{
+			width: 440px;
+			float: left;
+		}
+
+		.seccion .contenido_izquierdo .descripcion{	
+			color: #a6b3b3;
+			text-align: left;
+			float: left;
+			margin-right: 20px;
+		}	
+
+
+
+	.seccion .imagen{	
+		width: 460px;
+		height: 400px;
+		float: right;
+		background-color: #666666;
+
+	}
+
+
+.contenido_dos_columnas{		
+	padding: 20px;		
+	width: 920px;	
+	height: 400px;
+	margin:0 auto 0 auto;
+	background-color: #6699b3;
+	border-top: 10px;
+	border-color:#f2f2f2;
+	border-style: solid;
+}
+
+	.contenido_dos_columnas .contenido_izquierdo{	
+		width: 460px;
+		height: 400px;	
+		float: left;	
+	}
+
+		.contenido_dos_columnas .contenido_izquierdo .titulo{
+			width: 100%;			
+			height: 45px;	
+			font-size: 36px;
+			font-weight: 900;
+			color:#ffffff;
+			text-align: left;
+		}
+
+		.contenido_dos_columnas .contenido_izquierdo hr{
+			width: 440px;
+			float: left;
+		}
+
+		.contenido_dos_columnas .contenido_izquierdo .descripcion{	
+			color: #ffffff;
+			text-align: left;
+			float: left;
+			margin-right: 20px;
+		}			
+
+		.contenido_dos_columnas .contenido_derecho{	
+			color: #ffffff;
+			text-align: left;
+			float: right;
+			margin-top: 60px;
+			width: 460px;
+			height: 400px;		
+		}	
+
+/*-------Estilo Pagina catalogo--------------------------------*/
+
+.descripcion_catalogo{
+	padding: 20px;		
+	width: 920px;
+	margin:0 auto 0 auto;
+	background-color: #FFFFFF;
+}
+
+.descripcion_catalogo h1{
+	font-size: 36px;
+	color: #666666;
+	text-align: left;
+}
+
+.descripcion_catalogo hr{
+	padding-right: 30px;
+	background-color: #6699B3;
+	border-color: #6699B3;
+}
+
+.catalogo{
+	padding: 20px;		
+	width: 920px;
+	margin:0 auto 0 auto;
+	background-color: #FFFFFF;
+	float: left;
+}
+
+	.catalogo .producto{		
+		width: 460px;
+		height: 360px;
+		float: left;
+	}
+
+	.catalogo .producto .imagen{
+		margin: 10px;
+		height: 280px;
+		background-color: #ff0000;
+		text-align: center;
+	}
+
+	.catalogo .producto .nombre{
+		margin: 10px;
+		height: 80px;
+		padding-right: 20px;
+		text-align: center;
+		font-size: 25px;
+		color: #666666;
+	}
+
+	.catalogo .producto .nombre em{
+		font-style: none;
+		font-size: 20px;
+		font-weight: 300;
+		color: #666666;
+	}
+
+	.catalogo .producto .nombre:hover{
+		margin: 10px;
+		text-align: center;
+		font-size: 25px;
+		color: #222222;
+		background-color: #6699B3;
+	}
+
+
+/*--estilo pagina productos-----------------------------------------------------*/
+
+.contenido_productos{		
+	padding: 20px;		
+	width: 920px;	
+	height: 200px;
+	margin:0 auto 0 auto;
+	background-color: #FFFFFF;
+	border-color: #FFFFFF;
+}
+
+	.contenido_productos .izquierda{	
+		width: 460px;
+		float: left;		
+	}
+
+		.contenido_productos .izquierda .titulo{
+			width: 920px;			
+			height: 45px;	
+			font-size: 36px;
+			font-weight: 900;
+			color:#666666;
+			text-align: left;
+		}
+
+		.contenido_productos .izquierda hr{
+			width: 440px;
+			float: left;
+			color: #6699B3;
+		}
+
+		.contenido_productos .izquierda .descripcion{	
+			color: #A6B3B3;
+			margin-right: 20px;
+		}			
+		
+
+		.contenido_productos .derecha{	
+			color: #A6B3B3;
+			text-align: left;
+			float: right;			
+			margin-top: 60px;
+			width: 460px;		
+		}	
+	
+.boton_pedido { 
+	width: 180px;
+	height: 30px;
+	font-size: 13px;
+	font-weight: 900;
+	padding: 5px;
+	border: solid;	
+	color: #FFFFFF;	
+	background-color: #66DDFF;	
+	border-color: #66DDFF;
+	margin:0 auto 0 auto;
+	text-align: center;
+} 
+		 
+	.boton_pedido:hover { 
+		background: #666666;
+		border-color: #666666;		  
+	}	
+
+.centrar{
+	width: 940px;
+	margin:0 auto 0 auto;
+	background-color: #FFFFFF;
+	text-align: center;	
+	padding: 10px;
+}
+
+.tabla_formato{
+	display: table;
+	border-collapse: separate;
+	border-spacing: 2px;	
+	border-color:#FFFFFF;
+	margin:0 auto 0 auto;	
+}
+
+	.tabla_encabezado_azul{
+		padding: 6px;
+		margin: 3px;	
+		color: #FFFFFF;
+		font-size:14px;
+		background-color: #66CCFF;
+		text-align: center;
+	}
+
+	.tabla_encabezado_gris{
+		padding: 6px;
+		margin: 3px;
+		color: #FFFFFF;s
+		font-size:14px;
+		background-color: #66CCFF;
+		text-align: center;
+	}
+
+	.tabla_contenido{
+		color: #A6B3B3;
+		background-color: #FFFFFF;	
+		text-align: center;	
+	}
+
+/*--footer-----------------------------------------------------*/
+
+.footer{ 
+	margin:0 auto 0 auto;
+	text-align: center;
+	width: 960px; 
+	height: 42px; 
+	}
+
+.sub_footer{
+	float: left;
+	text-align: center;
+	color: #A6B3B3;
+	float: left; 	
+	width: 240px;
+	height: 42px;
+	border: 2px;	
+	margin-top: 15px;
+}

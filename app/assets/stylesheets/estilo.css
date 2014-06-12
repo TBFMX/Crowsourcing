@@ -56,6 +56,7 @@ body{
 .content{
    width: 960px;
    min-height: 400px;
+   min-height: auto;
    margin:0 auto 0 auto;  
    background-color: #f2f2f2;
 }
@@ -130,6 +131,12 @@ h6{
 
 form{
    padding: 20px;
+}
+
+table{
+  width: 850px;
+  margin: 0 auto 0 auto;
+  border: 1px solid #000000;
 }
 
 th{
@@ -246,18 +253,104 @@ input:focus{
   font-weight: bold;
 }
 
+/*--------------------------------------proyects-----------------------------------------------------*/
+
+
+/*-------show proyects------*/
+
+.show_proyects{
+  width: 698px;
+  height: auto;
+  border: 1px solid #000000;
+  margin:0 auto 0 auto;
+  text-align: center;
+  float: left;
+}
+
+.show_proyects .titulo{
+ width: 100%;
+ min-height: 25px;
+ background-color: #666666;
+ color: #FFFFFF;
+ font-size: 20px;
+ padding-top: 5px;
+ text-align: center;
+ margin: 10px auto 0 auto;
+ position: relative;
+}
+
+.show_proyects .datos{
+ width: 500px;
+ min-height: 25px;
+ font-size: 20px;
+ padding: 10px;
+ text-align: left;
+ position: relative;
+}
+
+.show_proyects .datos strong{
+  font-weight: bold;
+}
+
+
+.show_proyects img{ 
+ text-align: center;
+ min-width: auto;
+ height: auto;  
+ max-width: 850px;
+ margin-top: 20px;
+ background-color: #ffffff;
+}
+
+/*--------------------------------------images-----------------------------------------------------*/
+
+
+
+/*-------show images------*/
+
+.show_images{
+ width: 900px;
+ min-height: 300px;
+ border: 2px solid #000000;
+ margin: 0 auto 0 auto;
+ position: relative;
+ text-transform: capitalize; 
+ text-align: center;
+}
+
+.show_images .ruta{
+ width: 100%;
+ min-height: 25px;
+ background-color: #666666;
+ color: #FFFFFF;
+ font-size: 20px;
+ padding-top: 5px;
+ text-align: center;
+ margin: 10px auto 0 auto;
+ position: relative;
+}
+
+.show_images img{ 
+ text-align: center;
+ min-width: auto;
+ height: auto;  
+ max-width: 850px;
+ margin-top: 20px;
+ background-color: #ffffff;
+}
+
 /*--------------------------------------perks-----------------------------------------------------*/
 /*-------------------------------------------perks vista parcial _perks.html.erb------------------*/
 
 .perks{ 
-  width: 220px;
-  min-height: 100px;
-  max-height: auto;
-  margin:10px auto 10px auto;
+  width: 200px;
+  height: auto;
+  margin:10px 10px 0 auto;
+  float: right;
 }
 
 .perks .nombre{
-  width: 208px;
+  width: 188px;
   height: 17px;
   border: 1px solid #000000;
   text-align: left;
@@ -268,9 +361,9 @@ input:focus{
 }
 
 .perks .descripcion{
-  width: 208px;
-  min-height: 100px;
-  max-height: auto;
+  width: 188px;
+  max-height: 210px;
+  overflow: scroll;
   border: 1px solid #000000;  
   padding: 5px;
 }
@@ -304,18 +397,6 @@ input:focus{
  text-align: center;
  margin: 10px auto 0 auto;
  position: relative;
-}
-
-.show_perks .titulo{
- width: 850px;
- min-height: 25px;
- background-color: #a6b3b3;
- color: #FFFFFF;
- padding: 10px;
- font-size: 20px;
- text-align: center;
- margin: 10px auto 0 auto;
- position: relative; 
 }
 
 .show_perks .contenedor{ 
@@ -377,14 +458,15 @@ input:focus{
 /*-------------------------------------------status vista parcial _status.html.erb------------------*/
 
 .estatus{
-  width: 218px;
-  min-height: 100px;
+  width: 198px;
+  min-height: 98px;
   max-height: auto;
-  margin:10px auto 10px auto;
+  margin:0 10px 0 auto;
   border: 1px solid #000000;
   -webkit-box-shadow: 0 10px 6px -6px #777;
   -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;  
+  float: right;
 }
 
 .estatus p:first-of-type{

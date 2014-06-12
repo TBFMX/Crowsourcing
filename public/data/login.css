@@ -1,0 +1,119 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400);
+
+/*--Cuerpo-----------------------------------------------------*/
+
+body{
+	background-color: #F2F2F2;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+/*--contenido_generico-----------------------------------------------------*/
+
+.contenido{
+	width: 960px;
+	padding-top: 10px;	
+	margin:0 auto 0 auto;
+	background-color: #FFFFFF;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+/*--contenido index-----------------------------------------------------*/
+
+
+.contenido .login{
+	width: 400px;
+	height: 250px;
+	border-radius: 20px;
+	margin:0 auto 0 auto;
+	border: 3px solid;
+	border-color: #6699B3;
+	text-align: center;
+}
+
+.contenido .login .cintilla{
+	height: 20px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #666666; 
+	padding: 10px;
+	border-bottom: 3px solid;
+	border-color: #6699B3;
+}
+
+.contenido .login input,       
+.contenido .login  label { 
+	font-size: 15px; 
+	margin-bottom: 2px;
+	font-family: Arial, sans-serif;		   
+} 
+
+.contenido .login label{
+	width: 80px;
+	text-align: left;
+}
+
+.login #username, 
+.login #password{ 
+	width: 380px;
+	background: #fff;
+	border: 1px solid;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	border-radius: 5px;
+	margin-bottom: 10px; 
+	padding: 3px; 
+	border-color: #666666;
+} 	  
+
+.login input:focus { 
+	background-color: #E5E6E7;
+} 
+
+	.login .boton { 	
+		font-size: 13px;
+		font-weight: 900;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		width: 180px;
+		height: 30px;
+		border: 2px solid;	
+		border-radius: 5px;	
+		color: #FFFFFF;	
+		background-color: #66DDFF;	
+		border-color: #66DDFF;
+		margin:0 auto 0 auto;
+	} 
+		 
+	.login-form .boton:hover { 
+		background: #6699B3;
+		border-color: #6699B3;		  
+	}
+
+a.olvidePass{
+	text-decoration:none;
+	color: #666666;	
+	font-size: 10px;
+}
+
+a.olvidePass{ /* Link no visitado*/
+	text-decoration:none; 
+} 				
+
+a.olvidePass:link { /* Link no visitado*/
+	text-decoration:none; 
+	} 
+
+a.olvidePass:visited { /*Link visitado*/
+	text-decoration:none; 
+	color: #666666;	
+	} 
+
+a.olvidePass:active {/*Link activo*/
+	text-decoration:none; 
+	} 
+
+a.olvidePass:hover { /*Mause sobre el link*/
+	text-decoration:underline; 
+	color: #000000;	
+	} 
