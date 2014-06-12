@@ -1,39 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @perk.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @perk.description %>
-</p>
-
-<p>
-  <strong>Delivery date:</strong>
-  <%= @perk.delivery_date %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @perk.price %>
-</p>
-
-<p>
-  <strong>Pieces:</strong>
-  <%= @perk.pieces %>
-</p>
-
-<p>
-  <strong>Project:</strong>
-  <%= @perk.project_id %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @perk.image_id %>
-</p>
+<div class="show_perks">
+  <div class="titulo"><%= @perk.title %></div>
+  <div class="contenedor">
+    <div class="datos">
+      <p><strong>Precio: </strong><%= @perk.price %></p>
+      <p><strong>No. Piezas: </strong><%= @perk.pieces %>c
+      <p><strong>Fecha de envío: </strong><%= @perk.delivery_date %></p>
+      <div class="descripcion"><strong>Descripción:</strong><p><%= @perk.description %></p></div>
+    </div>    
+    <div class="imagen"><img></div>    
+  </div>
+  
+</div>
 
 <%= link_to 'Edit', edit_perk_path(@perk) %> |
 <%= link_to 'Back', perks_path %>
