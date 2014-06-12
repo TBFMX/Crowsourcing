@@ -208,3 +208,105 @@ a:hover{
   color: #FFFFFF;
   display: table;
 }
+
+/*-------------------------------------------founders------------------*/
+
+.founder{
+  width: 698px;
+  height: 248px;
+  border: 1px solid #000000;
+  margin:10px auto 10px auto;
+}
+
+.founder img{
+  float: left;
+  height: 200px;
+  width: 200px;
+  padding: 24px;
+
+}
+
+.founder .datos{
+  float: right;
+  width: 400px;
+  height: 200px; 
+  padding: 24px;  
+}
+
+.founder .datos p{
+  font-size: 20px;
+  margin-top:10px; 
+}
+
+.founder .datos p strong{
+  font-weight: bold;
+}
+
+/*-------------------------------------------perks------------------*/
+
+.perks{
+  width: 220px;
+  min-height: 100px;
+  max-height: auto;
+  margin:10px auto 10px auto;
+}
+
+.perks .nombre{
+  width: 208px;
+  height: 17px;
+  border: 1px solid #000000;
+  text-align: left;
+  font-size: 15px;
+  color: #FFFFFF;
+  background-color: #666666;
+  padding: 5px;
+}
+
+.perks .descripcion{
+  width: 208px;
+  min-height: 100px;
+  max-height: auto;
+  border: 1px solid #000000;  
+  padding: 5px;
+}
+
+.perks .descripcion p{
+  font-size: 15px;
+  margin-top:10px; 
+}
+
+.perks .descripcion p strong{
+  font-weight: bold;
+}
+
+/*-------------------------------------------status------------------*/
+
+.estatus{
+  width: 218px;
+  min-height: 100px;
+  max-height: auto;
+  margin:10px auto 10px auto;
+  border: 1px solid #000000;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;  
+}
+
+.estatus p:first-of-type{
+  font-size: 16px;
+  margin-top:5px; 
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+  border-bottom: 1px solid #000000;
+}
+
+.estatus p{
+  font-size: 16px;
+  margin-top:10px; 
+  margin-left: 10px;
+}
+
+.estatus p strong{
+  font-weight: bold;
+}
