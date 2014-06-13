@@ -59,6 +59,7 @@ body{
    min-height: auto;
    margin:0 auto 0 auto;  
    background-color: #f2f2f2;
+   overflow: hidden; /*--para que el cuadro agarre todo lo interno.---*/
 }
 
 .content .interior{
@@ -262,9 +263,10 @@ input:focus{
   width: 698px;
   height: auto;
   border: 1px solid #000000;
-  margin:0 auto 0 auto;
+  margin:30px auto 0 auto;
   text-align: center;
   float: left;
+  display: block;
 }
 
 .show_proyects .titulo{
@@ -453,6 +455,95 @@ input:focus{
   text-align: left;
 }
 
+/*------------------------------------Menus-------------------*/
+
+/* ----Menu desplegable --------*/
+  .project_menu {
+     font-family:Arial, Helvetica, sans-serif;
+     font-size:13px;
+     font-weight:bold;  
+   }
+
+   .project_menu ul {
+     float:left;
+     height:0px;
+     list-style:none;
+     margin:0;
+     padding:0;
+   }
+
+   .project_menu li{
+     float: inherit;
+     padding:0px;
+     width:116px;
+     height: 26px;
+     border:2px solid;
+     border-color: #f2f2f2;
+     background-color:#b3b3b3;
+   }
+
+   .project_menu li a{
+     color: #FFFFFF; /* Color de la fuente */
+     display:block;
+     margin:0px;
+     padding-top:5px;
+     height: 26px;
+     text-align:center;
+     text-decoration:none;
+    }
+
+   .project_menu li a:hover, .project_menu ul li:hover a {
+     background: #666666; /* Color de las pestañas al pasar el cursor va en info y mod */
+     color:#FFFFFF; /* Color del texto al pasar el cursor */
+     height:21px;
+     text-decoration:none;
+   }
+
+   .project_menu li ul {
+     float:inherit;
+     background:#002569; /* Color de fondo del submenú */
+     display:none;
+     height:auto;
+     padding:0px;
+     margin:0px;
+     position:absolute;
+     width: 300px; /* Ancho del submenú */
+     z-index:100;
+     border-top:1px solid #f2f2f2;  /*Borde superior del submenú */
+     text-align:right;
+   }
+     
+   .project_menu li:hover ul{
+    display:block;
+   }
+   
+   .project_menu li li {
+     display:block;
+     float:none;
+     margin:0px;
+     padding:0px;
+     width: auto;
+     }
+   
+   .project_menu li:hover li a {
+     background:none;
+   }
+   
+   .project_menu li ul a {
+     display:block;
+     height:55px; /*alto entre cada punto de submenu*/
+     font-size:13px;
+     margin:0px;
+     text-align:left;
+     margin-left:10px;
+     background-color:#666666;
+   }
+   
+   .project_menu li ul a:hover, .project_menu li ul li:hover a{
+     background:#666666; /* Color de las subpestañas al pasar el cursor */
+     color:#FFFFFF;
+     text-decoration:none;
+  }
 
 
 /*-------------------------------------------status vista parcial _status.html.erb------------------*/
@@ -461,7 +552,7 @@ input:focus{
   width: 198px;
   min-height: 98px;
   max-height: auto;
-  margin:0 10px 0 auto;
+  margin:30px 10px 0 auto;
   border: 1px solid #000000;
   -webkit-box-shadow: 0 10px 6px -6px #777;
   -moz-box-shadow: 0 10px 6px -6px #777;

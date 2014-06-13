@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @image = Image.find(@project.image_id)
-    @perks = Perks.where("project_id =",@project.id)
+    @perks = Perk.where("project_id = ?",@project.id)
   end
 
   # GET /projects/new
