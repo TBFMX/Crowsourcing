@@ -58,6 +58,9 @@ class AmendsController < ApplicationController
             end
           end
         }
+        format.json { render :show, status: :created, location: @amend }    
+      end
+    end  
   end
 
   # PATCH/PUT /amends/1
@@ -94,4 +97,6 @@ class AmendsController < ApplicationController
     def amend_params
       params.require(:amend).permit(:user_id, :description, :project_id, :image_id)
     end
+
+
 end
