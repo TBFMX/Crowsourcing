@@ -1,9 +1,12 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  add_breadcrumb I18n.t("breadcrumbs.comments"), comments_path
+  #add_breadcrumb I18n.t("breadcrumbs.comments"), comments_path
   # GET /comments
   # GET /comments.json
   def index
+    if params[:id].nil?
+      redirect_to root_path
+    end 
     @comments = Comment.where("project_id" => params[:id])
   end
 

@@ -4,6 +4,9 @@ class AmendsController < ApplicationController
   # GET projects/amends/:id
   # GET /amends.json
   def index
+    if params[:id].nil?
+      redirect_to root_path
+    end  
     @amends = Amend.where("project_id" => params[:id])
   end
 

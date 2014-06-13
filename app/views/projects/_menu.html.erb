@@ -1,9 +1,9 @@
 <div class="project_menu">
 	<ul>
-		<li><a href="#">About</a></li>
-		<li><a href="projects/amends/@projects.id">Update</a></li>
-		<li><a href="projects/comments/:id">Comments</a></li>
-		<li><a href="projects/funders/:id">Founders</a></li>
-		<li><a href="projects/galleries/:id">Gallery</a></li>
+		<li><%=link_to  "About", "/projects/#{@project.id}"%></li>
+		<li><%=link_to "Update","/projects/amends/#{@project.id}" %></li>
+		<li><%=link_to "Comments","/projects/comments/#{@project.id}" %></li>
+		<li><%=link_to "Founders","/projects/funders/#{@project.id}"%></li>
+		<li><%=link_to "Gallery","/projects/galleries/#{@project.id}" %></li>
 	</ul>				
 </div>
