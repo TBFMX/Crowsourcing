@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  #before_action :autorizado,  only: [ :edit, :update, :destroy]
   #add_breadcrumb I18n.t("breadcrumbs.comments"), comments_path
   # GET /comments
   # GET /comments.json
@@ -9,6 +10,7 @@ class CommentsController < ApplicationController
     end 
     @comments = Comment.where("project_id" => params[:id])
     @project = Project.find(params[:id])
+    add_breadcrumb I18n.t("breadcrumbs.comments"), '/projects/comments/' + @project.id.to_s 
   end
 
   # GET /comments/1

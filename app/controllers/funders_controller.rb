@@ -1,5 +1,6 @@
 class FundersController < ApplicationController
   before_action :set_funder, only: [:show, :edit, :update, :destroy]
+  #before_action :autorizado,  only: [ :edit, :update, :destroy]
 
   # GET /funders
   # GET /funders.json
@@ -8,7 +9,8 @@ class FundersController < ApplicationController
       redirect_to root_path
     end 
     @funders = Funder.where("project_id" => params[:id])
-    @project = Project.find(params[:id])    
+    @project = Project.find(params[:id])  
+    add_breadcrumb I18n.t("breadcrumbs.funders"), '/projects/funders/' + @project.id.to_s 
   end
 
   # GET /funders/1

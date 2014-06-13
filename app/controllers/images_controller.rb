@@ -1,5 +1,6 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
+  #before_action :autorizado,  only: [ :edit, :update, :destroy]
 
   # GET galleries/images/1
   # GET /images.json

@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
+  #before_action :autorizado,  only: [ :edit, :update, :destroy]
 
   # GET /videos
   # GET /videos.json
@@ -8,6 +9,7 @@ class VideosController < ApplicationController
       redirect_to root_path
     end 
     @videos = Video.where("galery_id" => params[:id])
+    add_breadcrumb I18n.t("breadcrumbs.videos"), '/projects/galleries/' + params[:id].to_s 
   end
 
   # GET /videos/1

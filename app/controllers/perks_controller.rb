@@ -1,5 +1,6 @@
 class PerksController < ApplicationController
   before_action :set_perk, only: [:show, :edit, :update, :destroy,:prosses_pay]
+  #before_action :autorizado,  only: [ :edit, :update, :destroy]
     #quitar cuando acaben las pruebas flash
     require 'paypal-sdk-rest'
     #include  PayPal::SDK::REST
@@ -11,6 +12,7 @@ class PerksController < ApplicationController
       redirect_to root_path
     end 
     @perks = Perk.where("project_id" => params[:id])
+    add_breadcrumb I18n.t("breadcrumbs.perks"), '/projects/perks/' + @project.id.to_s 
   end
 
   # GET /perks/1

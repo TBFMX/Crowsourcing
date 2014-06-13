@@ -1,14 +1,17 @@
 class AmendsController < ApplicationController
   before_action :set_amend, only: [:show, :edit, :update, :destroy]
+  #before_action :autorizado,  only: [ :edit, :update, :destroy]
   #add_breadcrumb I18n.t("breadcrumbs.amends"), amends_path()
   # GET projects/amends/:id
   # GET /amends.json
   def index
     if params[:id].nil?
       redirect_to root_path
-    end  
+    end
+      
     @amends = Amend.where("project_id" => params[:id])
     @project = Project.find(params[:id])
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/amends/' + @project.id.to_s 
   end
 
   # GET /amends/1

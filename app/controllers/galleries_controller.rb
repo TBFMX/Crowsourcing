@@ -1,5 +1,6 @@
 class GalleriesController < ApplicationController
   before_action :set_gallery, only: [:show, :edit, :update, :destroy]
+  #before_action :autorizado,  only: [ :edit, :update, :destroy]
 
   # GET /galleries
   # GET /galleries.json
@@ -9,6 +10,7 @@ class GalleriesController < ApplicationController
     end 
     @galleries = Gallery.where("project_id" => params[:id])
     @project = Project.find(params[:id])    
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/galleries/' + @project.id.to_s 
   end
 
   # GET /galleries/1
