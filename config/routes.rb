@@ -58,6 +58,8 @@ Rails.application.routes.draw do
     post 'pagos/paypal' => :paypal
   end
 
+  #preparacion para usar rutas amigables o traducidas segun se ocupe
+
   controller :galleries do
     get 'projects/galleries/:id' => :index
     get 'galleries/new/:id' => :new
@@ -99,6 +101,9 @@ Rails.application.routes.draw do
     post 'perks/new/:id' => :new
     get 'perks/:id/edit/:proy' => :edit
     post 'perks/:id/edit/:proy' => :edit
+  end
+  controller :funders do
+    get 'projects/funders/:id' => :index
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

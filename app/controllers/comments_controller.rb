@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @comments = Comment.where("project_id" => params[:id])
   end
 
   # GET /comments/1
@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new/proyecto_id
   def new
-    add_breadcrumb I18n.t("breadcrumbs.amends"), '/comments/new/#{params[:project]}'
+    add_breadcrumb I18n.t("breadcrumbs.comments"), '/comments/new/#{params[:project]}'
     @project = params[:id]
     @user = session[:user_id]
     @comment = Comment.new("project_id" => @project, "user_id"=> @user)

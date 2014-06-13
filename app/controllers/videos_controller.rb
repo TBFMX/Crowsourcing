@@ -4,7 +4,10 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.all
+    if params[:id].nil?
+      redirect_to root_path
+    end 
+    @videos = Video.where("galery_id" => params[:id])
   end
 
   # GET /videos/1

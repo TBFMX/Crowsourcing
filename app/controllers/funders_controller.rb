@@ -1,12 +1,15 @@
 class FundersController < ApplicationController
   before_action :set_funder, only: [:show, :edit, :update, :destroy]
-=begin
+
   # GET /funders
   # GET /funders.json
   def index
-    @funders = Funder.all
+    if params[:id].nil?
+      redirect_to root_path
+    end 
+    @funders = Funder.where("project_id" => params[:id])
   end
-=end
+
   # GET /funders/1
   # GET /funders/1.json
   def show

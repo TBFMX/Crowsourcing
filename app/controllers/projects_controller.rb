@@ -4,6 +4,9 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    if params[:id].nil?
+      redirect_to root_path
+    end 
     @projects = Project.all
   end
 

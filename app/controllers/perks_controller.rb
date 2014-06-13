@@ -7,7 +7,10 @@ class PerksController < ApplicationController
   # GET /perks
   # GET /perks.json
   def index
-    @perks = Perk.all
+    if params[:id].nil?
+      redirect_to root_path
+    end 
+    @perks = Perk.where("project_id" => params[:id])
   end
 
   # GET /perks/1
@@ -70,9 +73,22 @@ class PerksController < ApplicationController
       respond_to do |format|
         if @image.save
             format.html { 
+              puts "------------------------------------------------------------------"
+              puts @image.id
+              puts "------------------------------------------------------------------"
               respond_to do |format|
-                if @perk.update(params[:perk][:title], [:perk][:title][:description], [:perk][:title][:delivery_date], [:perk][:title][:price], [:perk][:title][:pieces], [:perk][:title][:project_id], @image.id)
-                  format.html { redirect_to @perk, notice: 'Perk was successfully updated.' }
+                if @perk.update(perk_params)
+                  format.html { 
+                    respond_to do |format|
+                      if @perk.update("image_id"=> @image.id)
+                         format.html {  redirect_to @perk, notice: 'Perk was successfully updated.' }
+                         format.json { render :show, status: :ok, location: @perk }
+                      else
+                        format.html { render :edit }
+                        format.json { render json: @perk.errors, status: :unprocessable_entity }
+                      end
+                    end  
+                    }
                   format.json { render :show, status: :ok, location: @perk }
                 else
                   format.html { render :edit }
@@ -170,7 +186,7 @@ class PerksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def perk_params
-      params.require(:perk).permit(:title, :description, :delivery_date, :price, :pieces, :project_id, :image_id)
+      params.require(:perk).permit(:title, :description, :delivery_date, :price, :pieces, :project_id)
     end
 
     #metodos para paypal
