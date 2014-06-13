@@ -4,7 +4,7 @@
 <% @project.each do |p| %>
 	<div class="show_proyects_home">
 		<div class="titulo">
-			 <strong>Nombre del proyecto: </strong><%= p.name %>
+			 <%= link_to "Proyecto: #{p.name}", "projects/#{p.id}"%>
 		</div>
 		<div class="datos">
 			 <p><strong>Monetary goal: </strong><%= p.monetary_goal %></p>
@@ -15,4 +15,5 @@
 		<img src="<%= @image.image_url %>">
 	</div>
 <% end %>
+
 
