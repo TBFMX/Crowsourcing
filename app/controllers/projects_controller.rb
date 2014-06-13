@@ -27,17 +27,22 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-     @pic = params[:project][:image]
+    puts "-------------------Proyecto---------------------------"
+      puts @project.inspect
+     puts "----------------------------------------------"
+     @pic = params[:project][:image_id]
     puts "-------------------Pic---------------------------"
       puts @pic.inspect
      puts "----------------------------------------------"
 
-    #unless params[:image].nil?
+    unless @pic.nil?
       @pics = DataFile.save(@pic)
-    #end
-        puts "-------------------Pics---------------------------"
+    else
+      @pics = ""  
+    end
+    puts "-------------------Pics---------------------------"
       puts @pics.inspect
-     puts "----------------------------------------------" 
+    puts "----------------------------------------------" 
     respond_to do |format|
       if @project.save
         format.html { 
@@ -145,6 +150,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :monetary_goal, :init_date, :finish_date)
+      params.require(:project).permit(:name, :monetary_goal, :init_date, :finish_date, :image_id)
     end
 end

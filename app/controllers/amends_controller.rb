@@ -1,10 +1,10 @@
 class AmendsController < ApplicationController
   before_action :set_amend, only: [:show, :edit, :update, :destroy]
   #add_breadcrumb I18n.t("breadcrumbs.amends"), amends_path()
-  # GET /amends
+  # GET projects/amends/:id
   # GET /amends.json
   def index
-    @amends = Amend.all
+    @amends = Amend.where("project_id" => params[:id])
   end
 
   # GET /amends/1

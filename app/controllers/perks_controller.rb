@@ -67,23 +67,23 @@ class PerksController < ApplicationController
     puts @image.inspect
     puts "----------------------------------------------"
     
-    respond_to do |format|
-      if @image.save
-        format.html { 
-                  respond_to do |format|
-                    if @perk.update(params[:perk][:title], [:perk][:title][:description], [:perk][:title][:delivery_date], [:perk][:title][:price], [:perk][:title][:pieces], [:perk][:title][:project_id], @image.id)
-                      format.html { redirect_to @perk, notice: 'Perk was successfully updated.' }
-                      format.json { render :show, status: :ok, location: @perk }
-                    else
-                      format.html { render :edit }
-                      format.json { render json: @perk.errors, status: :unprocessable_entity }
-                    end
-                  end
-                }
-                format.json { }
-            end
-          end
-     end
+      respond_to do |format|
+        if @image.save
+            format.html { 
+              respond_to do |format|
+                if @perk.update(params[:perk][:title], [:perk][:title][:description], [:perk][:title][:delivery_date], [:perk][:title][:price], [:perk][:title][:pieces], [:perk][:title][:project_id], @image.id)
+                  format.html { redirect_to @perk, notice: 'Perk was successfully updated.' }
+                  format.json { render :show, status: :ok, location: @perk }
+                else
+                  format.html { render :edit }
+                  format.json { render json: @perk.errors, status: :unprocessable_entity }
+                end
+              end
+            }
+            format.json { }
+        end
+      end
+  end
 
   # DELETE /perks/1
   # DELETE /perks/1.json
@@ -102,6 +102,7 @@ class PerksController < ApplicationController
 
   def paypal
     @perk = Perk.find(params[:id])
+    session[:lastperk]= @perk
 
     #falta cambiar ligas de recepcion
 
@@ -146,7 +147,7 @@ class PerksController < ApplicationController
 
 
       ########################################################################################################################
-      #execute_payment(@T_id)
+      #execute_payment(@T_id) #<-- no se esta usado aqui sino en "pago_paypal"
 
     else
       respuesta = false 
@@ -158,7 +159,7 @@ class PerksController < ApplicationController
 
   def pago_paypal
     pl_id = params[:PayerID]
-    execute_payment(session[:lastid],pl_id)
+    execute_payment(session[:lastid],pl_id,session[:lastperk])
   end
 
   private
@@ -202,7 +203,7 @@ class PerksController < ApplicationController
     redirect_to @ligapp
   end
 
-  def execute_payment(pp_id,pl_id)
+  def execute_payment(pp_id,pl_id,perk)
     payment = Payment.find(pp_id)
 
     if payment.execute( :payer_id => pl_id )
@@ -210,7 +211,7 @@ class PerksController < ApplicationController
       @mensajePP = "el pago se realizo con exito"
 
       #creamos el founder
-      #create_founder(perk)
+      create_founder(perk)
 
 
     else
@@ -222,8 +223,9 @@ class PerksController < ApplicationController
   #creador de funders
   def create_founder(perk)
     @user = session[:user_id]
-    @funder = Funder.new("user_id" => @user, "perk_id" =>perk)
     @project = Project.where("perk_id = ?", perk)
+    @funder = Funder.new("user_id" => @user, "perk_id" =>perk, "project_id" => @project)
+
 
     respond_to do |format|
       if @funder.save
