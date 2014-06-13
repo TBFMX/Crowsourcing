@@ -1,5 +1,5 @@
 <div class="estatus">
 	<p><strong>Estatus Actual:</strong></p>
-	<p><strong>Meta:</strong> $1,000,000.00</p>
-	<p><strong>Recaudado:</strong> $1,000.00</p>
+	<p><strong>Meta:</strong> <%=@project.monetary_goal %></p>
+	<p><strong>Recaudado:</strong> <%= number_to_currency(@project.Total_actual) %></p>
 </div>
