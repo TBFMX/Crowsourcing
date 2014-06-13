@@ -16,12 +16,12 @@ class FundersController < ApplicationController
     @user = User.find(@funder.user_id)
     @perk = Perk.find(@funder.perk_id)
   end
-=begin
+
   # GET /funders/new/proyecto_id
   def new 
     @funder = Funder.new
   end
-
+=begin
   # GET /funders/1/edit/proyecto_id
   def edit
         @project = params[:proy]
