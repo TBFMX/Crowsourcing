@@ -1,2 +1,18 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<%= render partial: '/home/slideshow', locals: {project: @home} %>
+<h4>Proyectos</h4>
+<p id="notice"><%= notice %></p>
+<% @project.each do |p| %>
+	<div class="show_proyects_home">
+		<div class="titulo">
+			 <strong>Nombre del proyecto: </strong><%= p.name %>
+		</div>
+		<div class="datos">
+			 <p><strong>Monetary goal: </strong><%= p.monetary_goal %></p>
+			 <p><strong>Init date: </strong><%= p.init_date %></p>
+			 <p><strong>Finish date: </strong><%= p.finish_date %></p>
+		</div>
+		<% @image = Image.find(p.image_id)%>
+		<img src="<%= @image.image_url %>">
+	</div>
+<% end %>
+

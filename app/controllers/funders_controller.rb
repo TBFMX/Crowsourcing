@@ -1,24 +1,24 @@
 class FundersController < ApplicationController
   before_action :set_funder, only: [:show, :edit, :update, :destroy]
-=begin
+
   # GET /funders
   # GET /funders.json
   def index
     @funders = Funder.all
   end
-=end
+
   # GET /funders/1
   # GET /funders/1.json
   def show
     @user = User.find(@funder.user_id)
     @perk = Perk.find(@funder.perk_id)
   end
-=begin
+
   # GET /funders/new/proyecto_id
   def new 
     @funder = Funder.new
   end
-
+=begin
   # GET /funders/1/edit/proyecto_id
   def edit
         @project = params[:proy]
