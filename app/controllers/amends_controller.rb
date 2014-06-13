@@ -8,6 +8,7 @@ class AmendsController < ApplicationController
       redirect_to root_path
     end  
     @amends = Amend.where("project_id" => params[:id])
+    @project = Project.find(params[:id])
   end
 
   # GET /amends/1

@@ -8,6 +8,7 @@ class FundersController < ApplicationController
       redirect_to root_path
     end 
     @funders = Funder.where("project_id" => params[:id])
+    @project = Project.find(params[:id])    
   end
 
   # GET /funders/1

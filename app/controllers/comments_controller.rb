@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
       redirect_to root_path
     end 
     @comments = Comment.where("project_id" => params[:id])
+    @project = Project.find(params[:id])
   end
 
   # GET /comments/1

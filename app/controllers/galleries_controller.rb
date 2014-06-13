@@ -8,6 +8,7 @@ class GalleriesController < ApplicationController
       redirect_to root_path
     end 
     @galleries = Gallery.where("project_id" => params[:id])
+    @project = Project.find(params[:id])    
   end
 
   # GET /galleries/1
