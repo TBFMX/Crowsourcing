@@ -351,6 +351,24 @@ input:focus{
  height: 200px;
  background-color: #ffffff;
 }
+
+.show_proyects_home a{
+   color: #FFFFFF;
+   text-decoration: none;
+}
+
+.show_proyects_home a:link{
+}
+
+.show_proyects_home a:visited{  
+}
+
+.show_proyects_home a:active{
+}
+
+.show_proyects_home a:hover{
+   font-weight: bold;
+}
 /*--------------------------------------images-----------------------------------------------------*/
 
 
@@ -427,10 +445,9 @@ input:focus{
 }
 
 .perks img{
- min-height: 50px;
- min-width: 50px;
  max-width: 150px;
  max-height: 150px;
+ margin: 0 auto 0 auto;
 }
 
 

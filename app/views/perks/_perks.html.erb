@@ -1,5 +1,5 @@
 
- <% @perks.each do |perk| %>
+<% @perks.each do |perk| %>
 <div class="perks">
 	<div class="nombre">
 		<%= perk.title %>
@@ -8,13 +8,10 @@
 		<p><strong>Descripción:</strong></p>
 		<p><%= perk.description %></p>
 		</br>
-		<p><%= perk.price %></p>
+		<p><strong>Precio :</strong><%= perk.price %></p>
+		<p><% @image2 = Image.find(perk.image_id)%>
+		<img src="<%= @image2.image_url %>"></p>
 		</br>
 	</div>
 </div>
-
-        <td><%= perk.pieces %></td>
-        <td><%= perk.image_id %></td>
-        
-     
-    <% end %>
+<% end %>
