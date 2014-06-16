@@ -2,6 +2,9 @@
 
 <%= render partial: '/projects/menu', locals: {project: @project} %>
 
+	<% if check_propiety(project) %>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+    <% end %>
 	<div class="show_proyects">
 		<div class="titulo">
 			 <strong>Nombre del proyecto: </strong><%= @project.name %>

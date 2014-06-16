@@ -42,3 +42,5 @@ gem 'exception_notification'
 gem "breadcrumbs_on_rails"
 gem 'paypal-sdk-rest'
 
+gem 'mysql2'
+

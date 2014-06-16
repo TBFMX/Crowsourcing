@@ -58,6 +58,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.4)
     multi_json (1.10.1)
+    mysql2 (0.3.16)
     paypal-sdk-core (0.2.8)
       multi_json (~> 1.0)
       xml-simple
@@ -132,6 +133,7 @@ DEPENDENCIES
   exception_notification
   jbuilder (~> 2.0)
   jquery-rails
+  mysql2
   paypal-sdk-rest
   rails (= 4.1.0)
   sass-rails (~> 4.0.3)

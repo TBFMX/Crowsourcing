@@ -47,7 +47,7 @@ class ProjectsController < ApplicationController
     end
     puts "-------------------Pics---------------------------"
       puts @pics.inspect
-    puts "----------------------------------------------" 
+    puts "--------------------------------------------------" 
     respond_to do |format|
       if @project.save
         format.html { 
@@ -55,13 +55,13 @@ class ProjectsController < ApplicationController
           @projects = Project.find(@project)
           puts "-------------------Proyecto---------------------------"
           puts @projects.inspect
-          puts "----------------------------------------------"
+          puts "------------------------------------------------------"
           
           #creo la galleria
           @gallery=Gallery.new("project_id"=>@projects.id)
           puts "--------------------Galleria--------------------------"
           puts @gallery.inspect
-          puts "----------------------------------------------"
+          puts "------------------------------------------------------"
           respond_to do |format|
             if @gallery.save
               format.html {
@@ -69,7 +69,7 @@ class ProjectsController < ApplicationController
                 @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
                 puts "--------------------Imagen--------------------------"
                 puts @image.inspect
-                puts "----------------------------------------------"
+                puts "----------------------------------------------------"
                 
                 respond_to do |format|
                   if @image.save
@@ -81,9 +81,7 @@ class ProjectsController < ApplicationController
                             @perk = Perk.new("project_id"=>@projects.id)
                             puts "--------------------Perk--------------------------"
                             puts @perk.inspect
-                            puts "----------------------------------------------"
-
-
+                            puts "--------------------------------------------------"
                             respond_to do |format|
                               if @perk.save
                                 format.html { redirect_to edit_perk_path(@perk) }
@@ -93,8 +91,7 @@ class ProjectsController < ApplicationController
                            }
                           format.json { }
                         end
-                      end
-                      
+                      end                      
                     }
                     format.json { }
                   end
