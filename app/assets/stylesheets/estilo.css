@@ -52,6 +52,16 @@ body{
    text-align: left;
 }
 
+.breadcrumb .linea a{
+   margin: 5px;
+   color:#FFFFFF;
+   text-decoration: underline;   
+}
+
+.breadcrumb .linea a:link   {}
+.breadcrumb .linea a:visited{}
+.breadcrumb .linea a:active {}
+.breadcrumb .linea a:hover  {font-weight: bold;}
 
 .content{
    width: 960px;
@@ -89,26 +99,11 @@ h1,h2,h3,h4,h5,h6{
    font-weight:bold;
 }
 
-h2{
-   font-size: 25px;
-}
-
-h3{
-   font-size: 30px;
-}
-
-h4{
-   font-size: 30px;
-   text-align: left;
-}
-
-h5{
-   font-size: 40px;
-}
-
-h6{
-   font-size: 45px;
-}
+h2{font-size: 25px;}
+h3{font-size: 30px;}
+h4{font-size: 30px;text-align: left;}
+h5{font-size: 40px;}
+h6{font-size: 45px;}
 
 .boton {   
    font-size: 13px;
@@ -151,22 +146,11 @@ tr,td,th{
    padding: 5px;
 }
 
-a{
-   color: #000000;
-}
-
-a:link{
-}
-
-a:visited{  
-}
-
-a:active{
-}
-
-a:hover{
-   font-weight: bold;
-}
+a{color: #000000;}
+a:link{}
+a:visited{}
+a:active{}
+a:hover{font-weight: bold;}
 
 input:focus{
   background-color: #f2f2f2;
@@ -357,18 +341,10 @@ input:focus{
    text-decoration: none;
 }
 
-.show_proyects_home a:link{
-}
-
-.show_proyects_home a:visited{  
-}
-
-.show_proyects_home a:active{
-}
-
-.show_proyects_home a:hover{
-   font-weight: bold;
-}
+.show_proyects_home a:link{}
+.show_proyects_home a:visited{}
+.show_proyects_home a:active{}
+.show_proyects_home a:hover{font-weight: bold;}
 /*--------------------------------------images-----------------------------------------------------*/
 
 
@@ -650,4 +626,3 @@ input:focus{
 .estatus p strong{
   font-weight: bold;
 }
-

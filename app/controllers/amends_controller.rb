@@ -25,7 +25,7 @@ class AmendsController < ApplicationController
     add_breadcrumb I18n.t("breadcrumbs.amends"), '/amends/new/#{params[:project]}'
     @amend = Amend.new
     #@project = params[:proy]
-    @project = params[:project]
+    @project2 = params[:project]
     @user = session[:user_id]
   end
 
