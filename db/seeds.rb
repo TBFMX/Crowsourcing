@@ -13,4 +13,4 @@ Rol.create(rol_name: 'rol_admin', admin: true, module_1: true, module_2: true, m
 Rol.create(rol_name: 'tecnico', admin: false, module_1: true, module_2: true, module_3: true, module_4: true, module_5: true)
 User.create(username: 'admin', password: 'k4st3lJY!', password_confirmation: 'k4st3lJY!', email: 'admin@admin.com', rol_id: 1)
 User.create(username: 'demo', password: 'demo' , password_confirmation: 'demo', email: 'sebastian@tbf.mx', rol_id: 2)
-Project.create(name: 'demo', monetary_goal: '0.00' , init_date: '12-01-2015' , finish_date: '12-01-2015', image_id: '12-10-2015')
+Project.create(name: 'demo', monetary_goal: '0.00' , init_date: '12-01-2015' , finish_date: '12-01-2015', image_id: '12-10-2015', user_id: 1)

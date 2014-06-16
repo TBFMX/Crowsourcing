@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   #before_action :autorizado,  only: [ :edit, :update, :destroy]
+  #include Porta
 
   # GET /projects
   # GET /projects.json
@@ -16,12 +17,14 @@ class ProjectsController < ApplicationController
   def show
     @image = Image.find(@project.image_id)
     @perks = Perk.where("project_id = ?",@project.id)
+    @permiso = check_propiety(@project)
   end
 
   # GET /projects/new
   def new
     @project = Project.new
     @user = session[:user_id]
+
   end
 
   # GET /projects/1/edit
@@ -144,6 +147,8 @@ class ProjectsController < ApplicationController
     end
   end
 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -152,6 +157,14 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :monetary_goal, :init_date, :finish_date, :image_id)
+      params.require(:project).permit(:name, :monetary_goal, :init_date, :finish_date, :image_id, :user_id)
     end
+    def check_propiety(proy_id)
+      @project = Project.find(proy_id)
+      if @project.user_id == session[:user_id]
+        return true
+      else
+        return false
+      end 
+  end
 end
