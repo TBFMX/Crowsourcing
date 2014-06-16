@@ -6,8 +6,11 @@ class ApplicationController < ActionController::Base
 
   before_action :authorize
 
+  #primer breadcrum
   add_breadcrumb I18n.t("breadcrumbs.homepage"), :root_path
   
+
+  #empieza Vulcano {
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => :render_error
     rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found   
@@ -88,17 +91,21 @@ class ApplicationController < ActionController::Base
     :env => request.env, :data => {:message => "was doing something wrong"})
   end
 
-
-  def set_locale
-    I18n.locale = :es || I18n.default_locale
-  end
-
   def check_exist(var)
     unless var.present?
       redirect_to root_path
     end
-  end  
- 
+  end
+  #termina Vulcano}
+
+  def check_propiety(proy_id)
+    @project = Project.find(proy_id)
+    if @project.user_id == session[:user_id]
+      return true
+    else
+      return false
+    end 
+  end 
 
   protected
   	def authorize
@@ -107,5 +114,9 @@ class ApplicationController < ActionController::Base
   			redirect_to login_url , notice: "Please log in"
   		end        
   	end
+    #establecemos local
+    def set_locale
+      I18n.locale = :es || I18n.default_locale
+    end
 
 end

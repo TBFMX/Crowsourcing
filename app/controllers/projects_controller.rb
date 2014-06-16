@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @user = session[:user_id]
   end
 
   # GET /projects/1/edit
