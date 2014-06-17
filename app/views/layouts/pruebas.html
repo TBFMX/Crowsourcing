@@ -1,37 +1,48 @@
-<!DOCTYPE html> 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/estilo.css"> 
-	<title></title>
-	</head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<style>
+	.primero,.segundo {
+		display:none;
+		padding:5px;
+		border:1px solid #ccc;
+		background-color:#f1f1f1;
+		position:relative;
+		width:200px;
+	}
+	#segundo {
+		position:absolute;
+		top:100px;
+	}
+	/* Al pasar el mouse por encima del div mostramos el div con la
+		clase ".primero". Esta clase, tiene que estar dentro del id
+		"primero" para que pueda funcionar
+	 */
+	#primero:hover .primero {
+		display:block;
+	}
+	#segundo:hover .segundo {
+		display:block;
+	}
+
+	#primero:active .primero {
+		display:block;
+	}
+	#segundo:active .segundo {
+		display:block;
+	}	
+	</style>
+</head>
+
 <body>
-
-<div class="perks">
-	<div class="nombre">
-		Perks # 1
-	</div>
-	<div class="descripcion">
-		<p><strong>Descripción:</strong></p>
-		<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	</div>
-</div>	
-
-<div class="founder">
-	<div class="tarjeta">
-		<img>
-		<div class="datos">
-			<p><strong>Nombre:</strong></p>
-			<p><strong>Cantidad:</strong></p>
-			<p><strong>Fecha:</strong></p>						
-		</div>		
-	</div>
-</div>
-
-
-<div class="estatus">
-	<p><strong>Estatus Actual:</strong></p>
-	<p><strong>Meta:</strong> $1,000,000.00</p>
-	<p><strong>Recaudado:</strong> $1,000.00</p>
-</div>
-</body></html>
+	<ul>
+		<li id="primero">mostrar el primer div oculto
+			<div class="primero">Contenido del primer div</div>
+		</li>
+		<li id="segundo">mostrar el segundo div oculto
+			<div class="segundo">Contenido del segundo div</div>
+		</li>
+	</ul>
+</body>
+</html>
