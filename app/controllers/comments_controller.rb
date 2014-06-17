@@ -21,9 +21,11 @@ class CommentsController < ApplicationController
   # GET /comments/new/proyecto_id
   def new
     add_breadcrumb I18n.t("breadcrumbs.comments"), '/comments/new/#{params[:project]}'
-    @project = params[:id]
+    @project2 = params[:id]
+    @project = Project.find(@project2)
+
     @user = session[:user_id]
-    @comment = Comment.new("project_id" => @project, "user_id"=> @user)
+    @comment = Comment.new("project_id" => @project2, "user_id"=> @user)
   end
 
   # GET /comments/1/edit/proyecto_id

@@ -21,8 +21,16 @@ class GalleriesController < ApplicationController
   # GET /galleries/new/:id
   def new
     add_breadcrumb I18n.t("breadcrumbs.amends"), '/galleries/new/#{params[:id]}'
-    @project = params[:id]
-    @gallery = Gallery.new("project_id"=> @project)
+    @project2 = params[:id]
+
+    puts"------------------------------------------------------"
+    puts @gallery.inspect
+    puts"------------------------------------------------------"
+
+    @gallery = Gallery.new("project_id"=> @project2)
+    @project= Project.find(@project2)
+
+
   end
 
   # GET /galleries/1/edit/proyecto_id

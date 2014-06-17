@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   #before_action :autorizado,  only: [ :edit, :update, :destroy]
-  #include Porta
+  include Porta
 
   # GET /projects
   # GET /projects.json
@@ -29,6 +29,11 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+     @user = session[:user_id]
+
+     puts"------------------------------------------------------"
+     puts @user.inspect
+     puts"------------------------------------------------------"
   end
 
   # POST /projects
@@ -159,6 +164,7 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :monetary_goal, :init_date, :finish_date, :image_id, :user_id)
     end
+=begin    
     def check_propiety(proy_id)
       @project = Project.find(proy_id)
       if @project.user_id == session[:user_id]
@@ -166,5 +172,6 @@ class ProjectsController < ApplicationController
       else
         return false
       end 
-  end
+    end
+=end    
 end

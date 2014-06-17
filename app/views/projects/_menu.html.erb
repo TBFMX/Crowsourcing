@@ -1,3 +1,8 @@
+<% unless  @project 
+	@project = @project2
+
+end %>
+
 <div class="project_menu">
 	<ul>
 		<li><%=link_to "About", "/projects/#{@project.id}"%></li>

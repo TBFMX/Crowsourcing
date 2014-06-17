@@ -2,6 +2,8 @@ class AmendsController < ApplicationController
   before_action :set_amend, only: [:show, :edit, :update, :destroy]
   #before_action :autorizado,  only: [ :edit, :update, :destroy]
   #add_breadcrumb I18n.t("breadcrumbs.amends"), amends_path()
+  include Porta
+
   # GET projects/amends/:id
   # GET /amends.json
   def index
@@ -18,40 +20,54 @@ class AmendsController < ApplicationController
   # GET /amends/1.json
   def show
       add_breadcrumb I18n.t("breadcrumbs.amends"), amends_path(@amend)
+      check_propiety(@amend.project_id)
   end
 
   # GET /amends/new/proyecto_id
   def new
     add_breadcrumb I18n.t("breadcrumbs.amends"), '/amends/new/#{params[:project]}'
-    @amend = Amend.new
     #@project = params[:proy]
-    @project2 = params[:project]
+    @project2 = params[:id]
+    @project = Project.find(@project2)
     @user = session[:user_id]
+    @amend = Amend.new("project_id" => @project2)
   end
 
   # GET /amends/1/edit/proyecto_id
   def edit
-      add_breadcrumb I18n.t("breadcrumbs.amends"), '/amends/#{params[:id]/amends/#{params[:proy]}'
-      @project = params[:proy]
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/amends/#{params[:id]/amends/#{params[:proy]}'
+    @project = params[:proy]
   end
 
   # POST /amends
   # POST /amends.json
   def create
-    @project = params[:amends][:project]
-    @user = params[:amends][:user]
-    @pic = params[:amends][:image]
-    @gallery = Gallery.where("project_id = ?",@project)
+    @project = params[:amend][:project_id]
+    @user = params[:amend][:user]
+    @pic = params[:amend][:image]
+
+    #hasta aqui bien  
+
+    @gallery = Gallery.where("project_id = ?",@project).limit(1).map { |l| l.id }
+     puts"------------------------------------------------------"
+     puts @gallery.inspect
+     puts"------------------------------------------------------"
     
-    #unless params[:image].nil?
+
+
+    unless params[:image].nil?
       @pics = DataFile.save(@pic)
-    #end
-    @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
+    else
+      @pics = ""  
+    end
+    #no agarra el id de galery
+    @image = Image.new("galery_id" => @gallery, "image_url" => @pics)
     
     respond_to do |format|
       if @image.save
         format.html { 
-          @amend = Amend.new("user_id"=>@user, "project_id" => @project, "description" => params[:amend][:description], "image_url" => @image)
+
+          @amend = Amend.new("user_id"=>@user, "project_id" => @project, "description" => params[:amend][:description], "image_id" => @image.id)
           respond_to do |format|
             if @amend.save
               format.html { redirect_to @amend, notice: 'Amend was successfully created.' }
