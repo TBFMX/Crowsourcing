@@ -14,13 +14,12 @@ Rol.create(rol_name: 'tecnico', admin: false, module_1: true, module_2: true, mo
 User.create(username: 'admin', password: 'k4st3lJY!', email: 'admin@admin.com', rol_id: 1)
 User.create(username: 'demo', password: 'demo' ,  email: 'sebastian@tbf.mx', rol_id: 2)
 #crear proyecto
-Project.create(name: 'demo', monetary_goal: '0.00' , init_date: '12-01-2015' , finish_date: '12-01-2015', user_id: 1)
+Project.create(name: 'demo', monetary_goal: '0.00' , init_date: '12-01-2015' ,image_id: 1 , finish_date: '12-01-2015', user_id: 1)
 #crear galeria
 Gallery.create(title:'principal', description:'galeria principal del proyecto', project_id: 1)
 #crear imagen
 Image.create(image_url: '/data/lobo_aullando_a_la_luna-1280x960.jpg', galery_id: 1)
-#actualizar proyecto
-Project.update(image_id: 1)
+
 
 #creamos el perk
 Perk.create(title: 'Sub-Demo' ,description: 'este es un producto de demostración', price: 100.00 ,pieces: 1 ,project_id: 1)
