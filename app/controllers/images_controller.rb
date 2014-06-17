@@ -18,7 +18,9 @@ class ImagesController < ApplicationController
 
   # GET /images/new/galleria_id
   def new
-    add_breadcrumb I18n.t("breadcrumbs.amends"), '/images/new/#{params[:id]}'
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+        add_breadcrumb I18n.t("breadcrumbs.galleries"), '/projects/galleries/' + @project.id.to_s 
+    add_breadcrumb I18n.t("breadcrumbs.images"), '/images/new/' + @project.id.to_s 
     @image = Image.new("galery_id" => params[:id])
   end
 

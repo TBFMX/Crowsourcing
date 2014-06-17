@@ -9,8 +9,9 @@ class GalleriesController < ApplicationController
       redirect_to root_path
     end 
     @galleries = Gallery.where("project_id" => params[:id])
-    @project = Project.find(params[:id])    
-    add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/galleries/' + @project.id.to_s 
+    @project = Project.find(params[:id])
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s    
+    add_breadcrumb I18n.t("breadcrumbs.galleries"), '/projects/galleries/' + @project.id.to_s 
   end
 
   # GET /galleries/1
@@ -20,7 +21,7 @@ class GalleriesController < ApplicationController
 
   # GET /galleries/new/:id
   def new
-    add_breadcrumb I18n.t("breadcrumbs.amends"), '/galleries/new/#{params[:id]}'
+
     @project2 = params[:id]
 
     puts"------------------------------------------------------"
@@ -29,13 +30,15 @@ class GalleriesController < ApplicationController
 
     @gallery = Gallery.new("project_id"=> @project2)
     @project= Project.find(@project2)
-
+        add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+    add_breadcrumb I18n.t("breadcrumbs.galleries"), '/projects/galleries/' + @project.id.to_s 
 
   end
 
   # GET /galleries/1/edit/proyecto_id
   def edit
-      add_breadcrumb I18n.t("breadcrumbs.amends"), '/galleries/#{params[:id]}/edit/#{params[:proy]}'
+      add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+      add_breadcrumb I18n.t("breadcrumbs.galleries"), '/projects/galleries/' + @project.id.to_s 
       @project = params[:proy]
   end
 

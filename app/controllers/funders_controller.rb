@@ -10,6 +10,7 @@ class FundersController < ApplicationController
     end 
     @funders = Funder.where("project_id" => params[:id])
     @project = Project.find(params[:id])  
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
     add_breadcrumb I18n.t("breadcrumbs.funders"), '/projects/funders/' + @project.id.to_s 
   end
 

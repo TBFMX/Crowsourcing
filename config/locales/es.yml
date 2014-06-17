@@ -13,6 +13,7 @@ es:
     users: 'User'
     amends: 'Actualizaciones'
     galleries: 'Galerias'
+    funders: 'Socios'
     
 
   activerecord:
@@ -42,6 +43,9 @@ es:
         video:
           video_url: 'Video'
         amend:
+          amend: 'Actualizacion'
+          amends: 'Actualizaciones'
+          lista: 'lista'
           description: 'Descripcion'
           imagen_id: 'Imagen'
         comments:

@@ -1,13 +1,11 @@
 <%= render partial: '/projects/menu', locals: {project: @project} %>
 <br/ ><br/ >
-<h1>Listing amends</h1>
+<h1>Listado de Actualizaciones</h1>
 
 <table>
   <thead>
     <tr>
-      <th>User</th>
       <th>Description</th>
-      <th>Project</th>
       <th>Image</th>
       <th colspan="3"></th>
     </tr>
@@ -16,13 +14,14 @@
   <tbody>
     <% @amends.each do |amend| %>
       <tr>
-        <td><%= amend.user_id %></td>
         <td><%= amend.description %></td>
-        <td><%= amend.project_id %></td>
-        <td><%= amend.image_id %></td>
+        <% unless amend.image.image_url.blank? || amend.image.image_url.nil? || amend.image.image_url.empty? %>
+          <td> <img src="<%= amend.image.image_url %>" height="50" width="50"></td>
+        <% else %>
+          <td> <p>sin imagen</p></td>
+        <%end%>
+        
         <td><%= link_to 'Show', amend %></td>
-        <td><%= link_to 'Edit', edit_amend_path(amend) %></td>
-        <td><%= link_to 'Destroy', amend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Amend', "/amends/new/" + @project.id.to_s %>
+<%= link_to 'Nueva Actualización', "/amends/new/" + @project.id.to_s %>

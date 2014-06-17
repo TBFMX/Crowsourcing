@@ -25,8 +25,8 @@
         <td><%= perk.project_id %></td>
         <td><%= perk.image_id %></td>
         <td><%= link_to 'Show', perk %></td>
-        <td><%= link_to 'Edit', edit_perk_path(perk) %></td>
-        <td><%= link_to 'Destroy', perk, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!--<td><%#= link_to 'Edit', edit_perk_path(perk) %></td>
+        <td><%#= link_to 'Destroy', perk, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Perk', new_perk_path %>
+<%= link_to 'Nuevo Producto', 'perks/new/' + @project.id.to_s %>

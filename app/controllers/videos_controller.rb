@@ -9,7 +9,10 @@ class VideosController < ApplicationController
       redirect_to root_path
     end 
     @videos = Video.where("galery_id" => params[:id])
-    add_breadcrumb I18n.t("breadcrumbs.videos"), '/projects/galleries/' + params[:id].to_s 
+    @gallery = Gallery.find(params[:id])
+    @project = Project.find(@gallery.project_id)
+      add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+      add_breadcrumb I18n.t("breadcrumbs.videos"), '/projects/galleries/' + params[:id].to_s 
   end
 
   # GET /videos/1

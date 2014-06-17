@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
     @image = Image.find(@project.image_id)
     @perks = Perk.where("project_id = ?",@project.id)
     @permiso = check_propiety(@project)
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
   end
 
   # GET /projects/new
@@ -66,7 +67,7 @@ class ProjectsController < ApplicationController
           puts "------------------------------------------------------"
           
           #creo la galleria
-          @gallery=Gallery.new("project_id"=>@projects.id)
+          @gallery=Gallery.new("project_id"=>@projects.id, "title" =>"principal", "description"=>"galeria principal del proyecto")
           puts "--------------------Galleria--------------------------"
           puts @gallery.inspect
           puts "------------------------------------------------------"

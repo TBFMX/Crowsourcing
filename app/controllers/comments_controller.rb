@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
     end 
     @comments = Comment.where("project_id" => params[:id])
     @project = Project.find(params[:id])
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
     add_breadcrumb I18n.t("breadcrumbs.comments"), '/projects/comments/' + @project.id.to_s 
   end
 
@@ -20,10 +21,10 @@ class CommentsController < ApplicationController
 
   # GET /comments/new/proyecto_id
   def new
-    add_breadcrumb I18n.t("breadcrumbs.comments"), '/comments/new/#{params[:project]}'
     @project2 = params[:id]
     @project = Project.find(@project2)
-
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+    add_breadcrumb I18n.t("breadcrumbs.comments"), '/projects/comments/' + @project.id.to_s 
     @user = session[:user_id]
     @comment = Comment.new("project_id" => @project2, "user_id"=> @user)
   end

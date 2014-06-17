@@ -13,6 +13,7 @@ class AmendsController < ApplicationController
       
     @amends = Amend.where("project_id" => params[:id])
     @project = Project.find(params[:id])
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
     add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/amends/' + @project.id.to_s 
   end
 
@@ -25,18 +26,23 @@ class AmendsController < ApplicationController
 
   # GET /amends/new/proyecto_id
   def new
-    add_breadcrumb I18n.t("breadcrumbs.amends"), '/amends/new/#{params[:project]}'
+    
     #@project = params[:proy]
     @project2 = params[:id]
     @project = Project.find(@project2)
     @user = session[:user_id]
     @amend = Amend.new("project_id" => @project2)
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/amends/' + @project.id.to_s 
   end
 
   # GET /amends/1/edit/proyecto_id
   def edit
-    add_breadcrumb I18n.t("breadcrumbs.amends"), '/amends/#{params[:id]/amends/#{params[:proy]}'
+
     @project = params[:proy]
+    @project2 = Project.find(@project)
+    add_breadcrumb @project.name.to_s, '/projects/' + @project2.id.to_s
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/amends/' + @project2.id.to_s 
   end
 
   # POST /amends
