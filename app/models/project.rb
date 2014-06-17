@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
 	has_many :funders, dependent: :destroy
 	has_many :perks
 	has_many :image	
-	validates :name, :monetary_goal, :init_date,:finish_date, presence:true
+	validates :name, :monetary_goal, presence:true
 	validates :monetary_goal, numericality: {greater_than_or_equal_to: 0.01}
 
 
