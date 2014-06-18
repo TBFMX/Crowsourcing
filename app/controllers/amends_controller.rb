@@ -20,7 +20,9 @@ class AmendsController < ApplicationController
   # GET /amends/1
   # GET /amends/1.json
   def show
-      add_breadcrumb I18n.t("breadcrumbs.amends"), amends_path(@amend)
+      @project = Project.find(@amend.project_id)
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+      add_breadcrumb I18n.t("breadcrumbs.amends"), '/amends/' + @amend.id.to_s
       check_propiety(@amend.project_id)
   end
 

@@ -115,6 +115,8 @@ class PerksController < ApplicationController
 
   #prosses_pay/1
   def prosses_pay
+    @perk = Perk.find(params[:id])
+
     
   end  
 
@@ -159,11 +161,6 @@ class PerksController < ApplicationController
       #puts  @T_id
       #######################################################################################################################
       get_payment_details(@T_id)
-      
-
-
-
-
       ########################################################################################################################
       #execute_payment(@T_id) #<-- no se esta usado aqui sino en "pago_paypal"
 
@@ -176,7 +173,9 @@ class PerksController < ApplicationController
   end
 
   def pago_paypal
-    pl_id = params[:PayerID]
+    pl_id = "EbKhU8rtN4qSqgbW1IKYCA"
+    #pl_id = params[:PayerID]
+    #HquhU5H-LZKHqgbRgYHABA
     execute_payment(session[:lastid],pl_id,session[:lastperk])
   end
 
@@ -203,7 +202,7 @@ class PerksController < ApplicationController
     payment = PayPal::SDK::REST::Payment.find(pp_id)
 
     # Get List of Payments
-    payment_history = PayPal::SDK::REST::Payment.all( :count => 1 )
+    payment_history = PayPal::SDK::REST::Payment.all( :count => 5 )
     @grid = payment_history.payments #<--para grid
 
     @ligas = Array.new
@@ -218,13 +217,13 @@ class PerksController < ApplicationController
     end
     @ligapp = @ligas[1]
 
-    redirect_to @ligapp
+    #redirect_to @ligapp
   end
 
   def execute_payment(pp_id,pl_id,perk)
-    payment = Payment.find(pp_id)
-
-    if payment.execute( :payer_id => pl_id )
+    #payment = PayPal::SDK::REST::Payment.find(pp_id)
+    payment = PayPal::SDK::REST::Payment.find("PAY-2PU736669C563082FKOQ3JOY")
+    if payment.execute( :payer_id => "DUFRQ8GWYMJXC" )
       # Success Message
       @mensajePP = "el pago se realizo con exito"
 

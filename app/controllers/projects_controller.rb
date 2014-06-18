@@ -1,14 +1,15 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  #before_action :autorizado,  only: [ :edit, :update, :destroy]
+  before_action :autorizado,  only: [ :edit, :update, :destroy]
+  skip_before_action :authorize, only:[:show, :index]
   include Porta
 
   # GET /projects
   # GET /projects.json
   def index
-    if params[:id].nil?
-      redirect_to root_path
-    end 
+    #if params[:id].nil?
+    #  redirect_to root_path
+    #end 
     @projects = Project.all
   end
 

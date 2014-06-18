@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
 
-  #before_action :authorize
+  before_action :authorize
 
   #primer breadcrum
   add_breadcrumb I18n.t("breadcrumbs.homepage"), :root_path

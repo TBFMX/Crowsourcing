@@ -1,2 +1,21 @@
 
+ <fieldset>
+	<legend> <%= @perk.title %></legend>
+	<div class="field">
+	    <p>Descripcion </p><br>
+	    <%= @perk.description %>
+  	</div>
+  	<div class="field">
+	    <p>Tiempo De Entrega</p><br>
+	    <%= @perk.delivery_date %>
+  	</div>
+  	<div class="field">
+	    <p>Precio </p><br>
+	    <%= @perk.price %>
+  	</div>
+  	<%= button_to "Pagar" , "/pagos/paypal/" + @perk.id.to_s, method: :get %>
+</fieldset>
+<div>
+	<img scr=<%= @perk.image.image_url %> height="70" width="70" > 
+</div>
 

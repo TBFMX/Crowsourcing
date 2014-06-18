@@ -1,10 +1,12 @@
 <%= render partial: '/home/slideshow', locals: {project: @home} %>
+
+<%= link_to "crear mi Proyecto", "/projects/new" %>
 <h4>Proyectos</h4>
 <p id="notice"><%= notice %></p>
 <% @project.each do |p| %>
 	<div class="show_proyects_home">
 		<div class="titulo">
-			 <%= link_to "Proyecto: #{p.name}", "projects/#{p.id}"%>
+			 <%= link_to "Proyecto: #{p.name}", "/projects/#{p.id}"%>
 		</div>
 		<div class="datos">
 			 <p><strong>Monetary goal: </strong><%= p.monetary_goal %></p>
@@ -12,8 +14,11 @@
 			 <p><strong>Finish date: </strong><%= p.finish_date %></p>
 		</div>
 		<% @image = Image.find(p.image_id)%>
-		<img src="<%= @image.image_url %>">
+		<% unless  @image.image_url.blank?   %>
+			<img src="<%= @image.image_url %>">
+		<% end %>
 	</div>
 <% end %>
+
 
 

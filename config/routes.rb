@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  get 'home/index', as: 'home'
 
   get 'home/about'
 
@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   controller :perks do
     get 'pagos/paypal/:id' => :paypal
     post 'pagos/paypal' => :paypal
+    get 'pagar/:id' => :prosses_pay
+    get 'pago/paypal/exito' => :pago_paypal
   end
 
   #preparacion para usar rutas amigables o traducidas segun se ocupe
