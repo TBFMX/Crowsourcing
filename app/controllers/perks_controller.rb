@@ -18,7 +18,7 @@ class PerksController < ApplicationController
   # GET /perks/1
   # GET /perks/1.json
   def show
-    @project = Project.new(@perk.project_id)
+    @project = Project.find(@perk.project_id)
     add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
   end
 
@@ -26,13 +26,16 @@ class PerksController < ApplicationController
   def new
     @project = params[:id]
     @perk = Perk.new
-    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+    @project2 = Project.find(@project)
+    add_breadcrumb @project2.name.to_s, '/projects/' + @project2.id.to_s
     @gallery = Gallery.where("project_id = ?",@project)
   end
 
   # GET /perks/1/edit/proyecto_id
   def edit
     @project = params[:proy]
+    @project2 = Project.find(@project)
+    add_breadcrumb @project2.name.to_s, '/projects/' + @project2.id.to_s
     @gallery = Gallery.where("project_id = ?",@project)
         puts "-------------------galeria---------------------------"
       puts @gallery.inspect

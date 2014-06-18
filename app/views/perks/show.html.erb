@@ -14,5 +14,5 @@
   
 </div>
 
-<%= link_to 'Edit', edit_perk_path(@perk) %> |
+<%= link_to 'Edit', "/perks/" + @perk.id.to_s + "/edit/" + @project.id.to_s %> |
 <%= link_to 'Back', home_path %>

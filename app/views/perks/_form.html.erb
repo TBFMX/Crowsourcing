@@ -29,11 +29,14 @@
   </div>
   <div class="field">
     <%= f.label :project_id %><br>
-    <%= f.hidden_field :project_id %>
+    <%= f.hidden_field :project_id , value: @project %>
   </div>
   <div class="field">
     <%= f.label :image_id %><br>
     <%= f.file_field :image_id %>
+    <%# unless :image_id.nil? %>
+      <p><%#= perk.image.image_url %></p>
+    <%# end %> 
   </div>
   <div class="field">
     <%= f.label :gallery_id %><br>
