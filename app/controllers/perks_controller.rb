@@ -18,12 +18,15 @@ class PerksController < ApplicationController
   # GET /perks/1
   # GET /perks/1.json
   def show
+    @project = Project.new(@perk.project_id)
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
   end
 
   # GET /perks/new/proyecto_id
   def new
     @project = params[:id]
     @perk = Perk.new
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
     @gallery = Gallery.where("project_id = ?",@project)
   end
 
