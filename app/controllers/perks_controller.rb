@@ -63,8 +63,12 @@ class PerksController < ApplicationController
     puts "-------------------galleria---------------------------"
       puts @gallery.inspect
     puts "------------------------------------------------------"
+
+    @project2 = Project.find(@project)
+    @gallery2 = Gallery.find(@gallery)
+
     unless @pic.nil?
-      @pics = DataFile.save(@pic)
+      @pics = DataFile.save(@pic,@project2.name,@gallery2.title)
 
       @image = Image.new("galery_id" => @gallery, "image_url" => @pics)
       puts "--------------------Imagen--------------------------"
@@ -136,8 +140,11 @@ class PerksController < ApplicationController
     puts "-------------------Pic---------------------------"
       puts @gallery.inspect
     puts "-------------------------------------------------"
+    @project2 = Project.find(@project)
+    @gallery2 = Gallery.find(@gallery)
+
     unless @pic.nil?
-      @pics = DataFile.save(@pic)
+      @pics = DataFile.save(@pic,@project2.name,@gallery2.title)
 
       @image = Image.new("galery_id" => @gallery, "image_url" => @pics)
       puts "--------------------Imagen--------------------------"

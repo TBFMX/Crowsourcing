@@ -23,7 +23,7 @@ es:
           password: 'Contraseña'
           email: 'Correo Electronico'
           password_confirmation: 'Confirmacion De Contraseña'
-          name: 'Nombre'
+          nombre: 'Nombre Completo'
         perk:
           title: 'Titulo'
           description: 'Descripcion'
@@ -32,7 +32,7 @@ es:
           piece: 'Piezas'
         project:
           name: 'Nombre'
-          monetary_goal: 'Meta'
+          monetary_goal: 'Objetivo a Recaudar'
           init_date: 'Fecha De Inicio'
           finish_date: 'Fechas de Vencimiento'
         gallery:

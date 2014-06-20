@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
      puts "----------------------------------------------"
 
     unless @pic.nil?
-      @pics = DataFile.save(@pic,[:project][:name],"principal")
+      @pics = DataFile.save(@pic,params[:project][:id],"principal")
     else
       @pics = ""  
     end
@@ -154,7 +154,7 @@ class ProjectsController < ApplicationController
         format.html {
           unless @pic.nil?
             @projects = Project.find(@project)
-            @pics = DataFile.save(@pic)
+            
             puts "-------------------Pics---------------------------"
               puts @pics.inspect
             puts "--------------------------------------------------"
@@ -163,6 +163,8 @@ class ProjectsController < ApplicationController
               puts "--------------------Galleria--------------------------"
               puts @gallery.inspect
               puts "------------------------------------------------------"
+              @gallery2 = Gallery.find(@gallery)
+              @pics = DataFile.save(@pic,@projects.name,@gallery2.title)
               respond_to do |format|
                 if @gallery.save
                   format.html {

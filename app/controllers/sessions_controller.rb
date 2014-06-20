@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
   	if user and user.authenticate(params[:password])
   		session[:user_id] = user.id
       session[:uname] = params[:username]
+      session[:user_name_complete] = user.nombre
   		session[:rol_id] = user.rol_id
 
       #variables de rol
@@ -25,14 +26,14 @@ class SessionsController < ApplicationController
       #termina variables de rol
 
 
-  		redirect_to session[:lasurl]
+  		redirect_to session[:lasurl], notice: "Session iniciada"
   	else
   		redirect_to root_path, alert: "Invalid user/password combination"
   	end
   end
 
   def destroy
-  	session[:user_id] = nil
+  	reset_session
   	redirect_to root_path, notice: "Logged out"
   end
 end

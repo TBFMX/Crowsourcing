@@ -1,4 +1,6 @@
-
+<% if flash[:alert] %>
+	<p id="notice"><%= flash[:alert] %></p>
+<% end %>
 <% unless User.find_by(id: session[:user_id]) %>
 <%= form_tag do %>
 	<div>
@@ -19,6 +21,9 @@
 		<p><%= link_to "forgotten password?", new_password_reset_path %></p>
 		
 	</div>
+	<% if flash[:alert] %>
+	<p id="notice"><%= flash[:alert] %></p>
+<% end %>
 
 <% else %>
 	<p>Bienvenido <%= "#{session[:uname]}"%></p>

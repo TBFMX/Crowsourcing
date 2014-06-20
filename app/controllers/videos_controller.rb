@@ -49,7 +49,8 @@ class VideosController < ApplicationController
   # POST /videos
   # POST /videos.json
   def create
-    respond_to do |format|
+    @video = Video.new(video_params)
+     respond_to do |format|
       if @video.save
         format.html { redirect_to @video, notice: 'Video was successfully created.' }
         format.json { render :show, status: :created, location: @video }

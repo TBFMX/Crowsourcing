@@ -1,6 +1,14 @@
 class User < ActiveRecord::Base
   has_secure_password
-  validates :username, :password, :email, presence:true
+  ######################################################
+  validates :username, presence: true, uniqueness: true
+  validates :password, presence: true, length: { in: 6..20 }
+  validates :email, presence: true, uniqueness: true 
+  validates_format_of :email, 
+              :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
+              :message => ' - El email no es un formato valido.'
+          
+  ######################################################            
 
     def send_password_reset
 	  generate_token(:password_reset_token)
