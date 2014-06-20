@@ -46,7 +46,7 @@ class ImagesController < ApplicationController
   def create
     @pic = params[:image][:image_url]
     @pics = DataFile.save(@pic)
-    @image = Image.new("image_url" => params[:image_url], "galery_id" => params[:galery_id])
+    @image = Image.new("image_url" => @pics, "galery_id" => params[:image][:galery_id])
 
     respond_to do |format|
       if @image.save

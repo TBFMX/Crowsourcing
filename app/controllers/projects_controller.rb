@@ -31,10 +31,10 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @user = session[:user_id]
-    @permiso = check_propiety(@project)
-    unless @permiso 
-      redirect_to root_path
-    end
+    # @permiso = check_propiety(@project)
+    # unless @permiso 
+    #   redirect_to root_path
+    # end
   end
 
   # GET /projects/1/edit
@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
      puts "----------------------------------------------"
 
     unless @pic.nil?
-      @pics = DataFile.save(@pic)
+      @pics = DataFile.save(@pic,[:project][:name],"principal")
     else
       @pics = ""  
     end
@@ -145,9 +145,59 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @pic = params[:project][:image_id]
+    puts "-------------------Pic---------------------------"
+      puts @pic.inspect
+    puts "----------------------------------------------"
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html {
+          unless @pic.nil?
+            @projects = Project.find(@project)
+            @pics = DataFile.save(@pic)
+            puts "-------------------Pics---------------------------"
+              puts @pics.inspect
+            puts "--------------------------------------------------"
+            unless @project.image.image_url.to_s == @pics.to_s
+              @gallery=Gallery.where("project_id = ? ",@projects.id).first
+              puts "--------------------Galleria--------------------------"
+              puts @gallery.inspect
+              puts "------------------------------------------------------"
+              respond_to do |format|
+                if @gallery.save
+                  format.html {
+                    @galleries = Gallery.find(@gallery)
+                    @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
+                    puts "--------------------Imagen--------------------------"
+                    puts @image.inspect
+                    puts "----------------------------------------------------"
+                    
+                    respond_to do |format|
+                      if @image.save
+                        format.html { 
+                          respond_to do |format|
+                            if @projects.update("image_id" => @image.id)
+                              format.html { 
+                               #aqui continua
+                               redirect_to @project , notice: 'El proyecto se edito exitosamente.'
+                              }
+                              format.json { }
+                            end
+                          end                      
+                        }
+                        format.json { }
+                      end
+                    end 
+                  }            
+                  format.json { }
+                end
+              end 
+            end
+          else
+            #en caso de que no se haya movido la imagen
+            redirect_to @project , notice: 'El proyecto se edito exitosamente.'
+          end  
+        }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }

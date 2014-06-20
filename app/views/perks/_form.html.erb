@@ -28,8 +28,8 @@
     <%= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.label :project_id %><br>
-    <%= f.hidden_field :project_id , value: @project %>
+    <%#= f.label :project_id %><br>
+    <%= f.hidden_field :project_id , value: @project.id %>
   </div>
   <div class="field">
     <%= f.label :image_id %><br>

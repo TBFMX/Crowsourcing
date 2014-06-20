@@ -20,7 +20,7 @@ class GalleriesController < ApplicationController
     @project = Project.find(@gallery.project_id)
     add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s    
     add_breadcrumb I18n.t("breadcrumbs.galleries"), '/projects/galleries/' + @project.id.to_s
-    @images = Image.where("galery_id = ?", @gallery.id)
+    @images = Image.where("galery_id = ?", @gallery.id).group(:image_url)
   end
 
   # GET /galleries/new/:id

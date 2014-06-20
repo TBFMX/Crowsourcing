@@ -17,3 +17,19 @@
 <%#= link_to 'Back', galleries_path %>
 <!--poner imagenes en tabla -->
 <%#= @images.inspect %>
+
+<table>
+	<tr>
+		<% @cont = 0 %>
+		<% @images.each do |img| %>
+		<% if @cont >= 3 %>
+			</tr>
+			<tr>
+			<% @cont = 0 %>	
+		<% end %>		
+			<td><img src="<%= img.image_url %>"  height="42" width="42" ></td>
+		<% @cont +=1 %>	
+		<% end %>
+	</tr>
+</table>		
+

@@ -46,7 +46,7 @@ class PerksController < ApplicationController
         puts "-------------------galeria---------------------------"
       puts @gallery.inspect
     puts "-------------------------------------------------"
-    @permiso = check_propiety(@project)
+    @permiso = check_propiety(@project2)
     unless @permiso 
       redirect_to root_path
     end
@@ -57,37 +57,20 @@ class PerksController < ApplicationController
   def create
     @perk = Perk.new(perk_params)
 
-    respond_to do |format|
-      if @perk.save
-        format.html { redirect_to @perk, notice: 'Perk was successfully created.' }
-        format.json { render :show, status: :created, location: @perk }
-      else
-        format.html { render :new }
-        format.json { render json: @perk.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /perks/1
-  # PATCH/PUT /perks/1.json
-  def update
-    #recupero datos
     @pic = params[:perk][:image_id]
     @project = params[:perk][:project_id]
-    @gallery = params[:perk][:galery_id]
-    puts "-------------------Pic---------------------------"
+    @gallery = params[:gallery_id]
+    puts "-------------------galleria---------------------------"
       puts @gallery.inspect
-    puts "-------------------------------------------------"
+    puts "------------------------------------------------------"
     unless @pic.nil?
       @pics = DataFile.save(@pic)
-    else
-      @pics = " "  
-    end
-    @image = Image.new("galery_id" => @gallery, "image_url" => @pics)
-    puts "--------------------Imagen--------------------------"
-    puts @image.inspect
-    puts "----------------------------------------------"
-    
+
+      @image = Image.new("galery_id" => @gallery, "image_url" => @pics)
+      puts "--------------------Imagen--------------------------"
+      puts @image.inspect
+      puts "----------------------------------------------"
+
       respond_to do |format|
         if @image.save
             format.html { 
@@ -95,12 +78,18 @@ class PerksController < ApplicationController
               puts @image.id
               puts "------------------------------------------------------------------"
               respond_to do |format|
-                if @perk.update(perk_params)
+                if @perk.save
                   format.html { 
                     respond_to do |format|
                       if @perk.update("image_id"=> @image.id)
-                         format.html {  redirect_to session[:url_to_return], notice: 'Perk was successfully updated.' }
-                         format.json { render :show, status: :ok, location: @perk }
+                        if session[:url_to_return].blank?
+                          url = "/projects/" + @project
+                        else
+                          url = session[:url_to_return]
+                          session[:url_to_return] = ""
+                        end  
+                        format.html {  redirect_to url, notice: 'Perk was successfully updated.' }
+                        format.json { render :show, status: :ok, location: @perk }
                       else
                         format.html { render :edit }
                         format.json { render json: @perk.errors, status: :unprocessable_entity }
@@ -117,6 +106,100 @@ class PerksController < ApplicationController
             format.json { }
         end
       end
+    else
+      respond_to do |format|
+        if @perk.save
+          if session[:url_to_return].blank?
+            url = "/projects/" + @project
+          else
+            url = session[:url_to_return]
+            session[:url_to_return] = ""
+          end  
+          format.html {  redirect_to url, notice: 'Perk was successfully updated.' }
+          format.json { render :show, status: :ok, location: @perk }
+        else
+            format.html { render :edit }
+            format.json { render json: @perk.errors, status: :unprocessable_entity }
+        end
+      end    
+      @pics = " "  
+    end
+  end
+
+  # PATCH/PUT /perks/1
+  # PATCH/PUT /perks/1.json
+  def update
+    #recupero datos
+    @pic = params[:perk][:image_id]
+    @project = params[:perk][:project_id]
+    @gallery = params[:gallery_id]
+    puts "-------------------Pic---------------------------"
+      puts @gallery.inspect
+    puts "-------------------------------------------------"
+    unless @pic.nil?
+      @pics = DataFile.save(@pic)
+
+      @image = Image.new("galery_id" => @gallery, "image_url" => @pics)
+      puts "--------------------Imagen--------------------------"
+      puts @image.inspect
+      puts "----------------------------------------------"
+
+      respond_to do |format|
+        if @image.save
+            format.html { 
+              puts "------------------------------------------------------------------"
+              puts @image.id
+              puts "------------------------------------------------------------------"
+              respond_to do |format|
+                if @perk.update(perk_params)
+                  format.html { 
+                    respond_to do |format|
+                      if @perk.update("image_id"=> @image.id)
+                        if session[:url_to_return].blank?
+                          url = "/projects/" + @project
+                        else
+                          url = session[:url_to_return]
+                          session[:url_to_return] = ""
+                        end  
+                        format.html {  redirect_to url, notice: 'Perk was successfully updated.' }
+                        format.json { render :show, status: :ok, location: @perk }
+                      else
+                        format.html { render :edit }
+                        format.json { render json: @perk.errors, status: :unprocessable_entity }
+                      end
+                    end  
+                    }
+                  format.json { render :show, status: :ok, location: @perk }
+                else
+                  format.html { render :edit }
+                  format.json { render json: @perk.errors, status: :unprocessable_entity }
+                end
+              end
+            }
+            format.json { }
+        end
+      end
+    else
+      respond_to do |format|
+        if @perk.update(perk_params)
+          if session[:url_to_return].blank?
+            url = "/projects/" + @project
+          else
+            url = session[:url_to_return]
+            session[:url_to_return] = ""
+          end  
+          format.html {  redirect_to url, notice: 'Perk was successfully updated.' }
+          format.json { render :show, status: :ok, location: @perk }
+        else
+            format.html { render :edit }
+            format.json { render json: @perk.errors, status: :unprocessable_entity }
+        end
+      end    
+      @pics = " "  
+    end
+    
+    
+
   end
 
   # DELETE /perks/1
