@@ -1,7 +1,8 @@
 class Project < ActiveRecord::Base
 	has_many :funders, dependent: :destroy
-	has_many :perks
-	has_many :image	
+	has_many :perks , dependent: :destroy
+	has_many :images	
+	has_many :galeries, dependent: :destroy
 	validates :name, :monetary_goal, presence:true
 	validates :monetary_goal, numericality: {greater_than_or_equal_to: 0.01}
 

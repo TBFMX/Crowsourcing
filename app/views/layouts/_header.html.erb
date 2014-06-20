@@ -1,3 +1,10 @@
 <div class="header">
   <h1>Bienvenido a Crowsourcing!</h1>
+  <% if session[:uname] %>
+  	<p> estas conectado como <%= session[:uname] %>  </p>
+  <% else %>
+  	<p> estas conectado como visitante  </p>	
+  <% end %>
+  </br>
+  <p>hola #<%= session[:user_id] %></p>
 </div>

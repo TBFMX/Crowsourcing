@@ -13,9 +13,11 @@
 			 <p><strong>Init date: </strong><%= p.init_date %></p>
 			 <p><strong>Finish date: </strong><%= p.finish_date %></p>
 		</div>
-		<% @image = Image.find(p.image_id)%>
-		<% unless  @image.image_url.blank?   %>
-			<img src="<%= @image.image_url %>">
+		<% unless p.image_id.blank?   %>
+			<% @image = Image.find(p.image_id)%>
+			<% unless  @image.image_url.blank?   %>
+				<img src="<%= @image.image_url %>">
+			<% end %>	
 		<% end %>
 	</div>
 <% end %>

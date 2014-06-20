@@ -4,6 +4,7 @@ class PerksController < ApplicationController
     #quitar cuando acaben las pruebas flash
     require 'paypal-sdk-rest'
     #include  PayPal::SDK::REST
+      include Porta
 
   # GET /perks
   # GET /perks.json
@@ -13,6 +14,7 @@ class PerksController < ApplicationController
     end 
     @perks = Perk.where("project_id" => params[:id])
     add_breadcrumb I18n.t("breadcrumbs.perks"), '/projects/perks/' + @project.id.to_s 
+    @permiso = check_propiety(@project)
   end
 
   # GET /perks/1
@@ -29,6 +31,10 @@ class PerksController < ApplicationController
     @project2 = Project.find(@project)
     add_breadcrumb @project2.name.to_s, '/projects/' + @project2.id.to_s
     @gallery = Gallery.where("project_id = ?",@project)
+    @permiso = check_propiety(@project)
+    unless @permiso 
+      redirect_to root_path
+    end
   end
 
   # GET /perks/1/edit/proyecto_id
@@ -40,6 +46,10 @@ class PerksController < ApplicationController
         puts "-------------------galeria---------------------------"
       puts @gallery.inspect
     puts "-------------------------------------------------"
+    @permiso = check_propiety(@project)
+    unless @permiso 
+      redirect_to root_path
+    end
   end
 
   # POST /perks
@@ -89,7 +99,7 @@ class PerksController < ApplicationController
                   format.html { 
                     respond_to do |format|
                       if @perk.update("image_id"=> @image.id)
-                         format.html {  redirect_to @perk, notice: 'Perk was successfully updated.' }
+                         format.html {  redirect_to session[:url_to_return], notice: 'Perk was successfully updated.' }
                          format.json { render :show, status: :ok, location: @perk }
                       else
                         format.html { render :edit }
@@ -112,9 +122,11 @@ class PerksController < ApplicationController
   # DELETE /perks/1
   # DELETE /perks/1.json
   def destroy
+    @project = Project.find(@perk.project_id)
+
     @perk.destroy
     respond_to do |format|
-      format.html { redirect_to perks_url, notice: 'Perk was successfully destroyed.' }
+      format.html { redirect_to '/projects/' + @project.id.to_s, notice: 'Perk was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

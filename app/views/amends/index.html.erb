@@ -2,6 +2,10 @@
 <br/ ><br/ >
 <h1>Listado de Actualizaciones</h1>
 
+<% if @permiso %>
+  <%= link_to 'Nueva Actualización', "/amends/new/" + @project.id.to_s %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -29,4 +33,3 @@
 
 <br>
 
-<%= link_to 'Nueva Actualización', "/amends/new/" + @project.id.to_s %>

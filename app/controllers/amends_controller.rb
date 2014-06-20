@@ -15,6 +15,8 @@ class AmendsController < ApplicationController
     @project = Project.find(params[:id])
     add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
     add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/amends/' + @project.id.to_s 
+    @permiso = check_propiety(@project)
+    
   end
 
   # GET /amends/1
@@ -28,14 +30,20 @@ class AmendsController < ApplicationController
 
   # GET /amends/new/proyecto_id
   def new
-    
-    #@project = params[:proy]
-    @project2 = params[:id]
-    @project = Project.find(@project2)
-    @user = session[:user_id]
-    @amend = Amend.new("project_id" => @project2)
-    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
-    add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/amends/' + @project.id.to_s 
+   
+  
+      #@project = params[:proy]
+      @project2 = params[:id]
+      @project = Project.find(@project2)
+      @user = session[:user_id]
+      @amend = Amend.new("project_id" => @project2)
+      @permiso = check_propiety(@project)
+    if @permiso
+      add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+      add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/amends/' + @project.id.to_s 
+    else
+      redirect_to home_path
+    end
   end
 
   # GET /amends/1/edit/proyecto_id
@@ -44,7 +52,11 @@ class AmendsController < ApplicationController
     @project = params[:proy]
     @project2 = Project.find(@project)
     add_breadcrumb @project.name.to_s, '/projects/' + @project2.id.to_s
-    add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/amends/' + @project2.id.to_s 
+    add_breadcrumb I18n.t("breadcrumbs.amends"), '/projects/amends/' + @project2.id.to_s
+    @permiso = check_propiety(@project)
+    unless @permiso 
+      redirect_to home_path
+    end  
   end
 
   # POST /amends

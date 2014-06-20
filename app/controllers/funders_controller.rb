@@ -1,7 +1,7 @@
 class FundersController < ApplicationController
   before_action :set_funder, only: [:show, :edit, :update, :destroy]
   #before_action :autorizado,  only: [ :edit, :update, :destroy]
-
+  include Porta
   # GET /funders
   # GET /funders.json
   def index

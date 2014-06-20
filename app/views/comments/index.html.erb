@@ -1,7 +1,10 @@
 <%= render partial: '/projects/menu', locals: {project: @project} %>
-<br/ ><br/ >
+<br/ ><br/ ><br/ >
+<% if @permiso %>
+<%= link_to 'Nuevo Comentario', "/comments/new/" + @project.id.to_s %>
+<% end %>
+<br/ >
 <h1>Listado de Comentarios</h1>
-
 <table>
   <thead>
     <tr>
@@ -23,4 +26,4 @@
 
 <br>
 
-<%= link_to 'Nuevo Comentario', "/comments/new/" + @project.id.to_s %>
+

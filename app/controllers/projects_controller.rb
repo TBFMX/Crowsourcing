@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :autorizado,  only: [ :edit, :update, :destroy]
+  #before_action :autorizado,  only: [ :edit, :update, :destroy]
   skip_before_action :authorize, only:[:show, :index]
   include Porta
 
@@ -11,14 +11,19 @@ class ProjectsController < ApplicationController
     #  redirect_to root_path
     #end 
     @projects = Project.all
+    @permiso = check_propiety(@project)
+   
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
     @image = Image.find(@project.image_id)
-    @perks = Perk.where("project_id = ?",@project.id)
+    @perks = Perk.where("project_id = ?",@project.id).order("price")
     @permiso = check_propiety(@project)
+    puts "---------permiso--------------------------------"
+    puts @permiso
+    puts "-----------------------------------------"
     add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
   end
 
@@ -26,7 +31,10 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @user = session[:user_id]
-
+    @permiso = check_propiety(@project)
+    unless @permiso 
+      redirect_to root_path
+    end
   end
 
   # GET /projects/1/edit
@@ -36,6 +44,10 @@ class ProjectsController < ApplicationController
      puts"------------------------------------------------------"
      puts @user.inspect
      puts"------------------------------------------------------"
+     @permiso = check_propiety(@project)
+    unless @permiso 
+      redirect_to root_path
+    end
   end
 
   # POST /projects
@@ -94,7 +106,7 @@ class ProjectsController < ApplicationController
                             puts "--------------------------------------------------"
                             respond_to do |format|
                               if @perk.save
-                                format.html { redirect_to edit_perk_path(@perk) }
+                                format.html { redirect_to '/perks/' + @perk.id.to_s + '/edit/' + @project.id.to_s }
                                 format.json {  }
                               end
                             end

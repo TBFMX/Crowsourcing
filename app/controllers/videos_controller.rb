@@ -1,6 +1,7 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
   #before_action :autorizado,  only: [ :edit, :update, :destroy]
+    include Porta
 
   # GET /videos
   # GET /videos.json
@@ -13,6 +14,8 @@ class VideosController < ApplicationController
     @project = Project.find(@gallery.project_id)
       add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
       add_breadcrumb I18n.t("breadcrumbs.videos"), '/projects/galleries/' + params[:id].to_s 
+    @permiso = check_propiety(@project)
+     
   end
 
   # GET /videos/1
@@ -24,10 +27,23 @@ class VideosController < ApplicationController
   def new
     @gallery = params[:id]
     @video = Video.new("galery_id" => @gallery)
+    @gallery3 = Gallery.find(params[:id])
+    @project = Project.find(@gallery3.project_id)
+    @permiso = check_propiety(@project)
+    unless @permiso 
+      redirect_to root_path
+    end
   end
 
   # GET /videos/1/edit
   def edit
+    @gallery = params[:id]
+    @gallery3 = Gallery.find(params[:id])
+    @project = Project.find(@gallery3.project_id)
+    @permiso = check_propiety(@project)
+    unless @permiso 
+      redirect_to root_path
+    end
   end
 
   # POST /videos

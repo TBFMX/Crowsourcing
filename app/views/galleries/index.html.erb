@@ -1,5 +1,10 @@
 <%= render partial: '/projects/menu', locals: {project: @project} %>
-<br/ ><br/ >
+<br/ ><br/ ><br/ >
+<% if @permiso %>
+  <%= link_to 'nueva Galeria', '/galleries/new/' + @project.id.to_s %> 
+
+<% end %>
+<br/ >
 <h1>Lista de galerias</h1>
 
 <table>
@@ -19,8 +24,10 @@
         <td><%= gallery.description %></td>
         <td><%= gallery.project_id %></td>
         <td><%= link_to 'Show', gallery %></td>
-        <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
-        <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if @permiso %>
+          <td>  <%= link_to 'Agregar imagen', '/images/new/' + gallery.id.to_s %> | <%#= link_to 'Edit', edit_gallery_path(gallery) %></td>
+          <td><%= link_to 'Agregar Video', '/videos/new/' + gallery.id.to_s %><%#= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +35,3 @@
 
 <br>
 
-<%= link_to 'nueva Galeria', '/galleries/new/' + @project.id.to_s %>

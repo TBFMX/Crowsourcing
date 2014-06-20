@@ -1,6 +1,7 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
   #before_action :autorizado,  only: [ :edit, :update, :destroy]
+      include Porta
 
   # GET galleries/images/1
   # GET /images.json
@@ -9,6 +10,10 @@ class ImagesController < ApplicationController
       redirect_to root_path
     end  
     @images = Image.where("galery_id" => params[:id])
+    @gallery =Gallery.find(params[:id])
+    @project = Project.find(@gallery.project_id)
+    @permiso = check_propiety(@project)
+
   end
 
   # GET /images/1
@@ -18,10 +23,16 @@ class ImagesController < ApplicationController
 
   # GET /images/new/galleria_id
   def new
+    @gallery =Gallery.find(params[:id])
+    @project = Project.find(@gallery.project_id)
     add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
         add_breadcrumb I18n.t("breadcrumbs.galleries"), '/projects/galleries/' + @project.id.to_s 
     add_breadcrumb I18n.t("breadcrumbs.images"), '/images/new/' + @project.id.to_s 
     @image = Image.new("galery_id" => params[:id])
+    @permiso = check_propiety(@project)
+    unless @permiso 
+      redirect_to root_path
+    end
   end
 
   # GET /images/1/edit/
@@ -39,7 +50,7 @@ class ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
-        format.html { redirect_to @image, notice: 'Image was successfully created.' }
+        format.html { redirect_to '/galleries/' + params[:image][:galery_id].to_s, notice: 'Image was successfully created.' }
         format.json { render :show, status: :created, location: @image }
       else
         format.html { render :new }
@@ -53,7 +64,7 @@ class ImagesController < ApplicationController
   def update
     respond_to do |format|
       if @image.update(image_params)
-        format.html { redirect_to @image, notice: 'Image was successfully updated.' }
+        format.html { redirect_to '/galleries/' + params[:galery_id].to_s, notice: 'Image was successfully updated.' }
         format.json { render :show, status: :ok, location: @image }
       else
         format.html { render :edit }
@@ -67,7 +78,7 @@ class ImagesController < ApplicationController
   def destroy
     @image.destroy
     respond_to do |format|
-      format.html { redirect_to images_url, notice: 'Image was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Image was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

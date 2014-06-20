@@ -5,6 +5,11 @@
 <div class="perks">
 	<div class="nombre">
 		<%= perk.title %>
+		<% if @permiso %>
+			<% session[:url_to_return] = request.original_url %>
+			<td><%= link_to 'Edit', '/perks/' + perk.id.to_s + '/edit/' + perk.project_id.to_s %></td>
+			<td><%= link_to 'Destroy', '/perks/' + perk.id.to_s, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<% end %>
 	</div>
 	<div class="descripcion">
 		<p><strong>Descripción:</strong></p>

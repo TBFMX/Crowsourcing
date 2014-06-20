@@ -1,5 +1,5 @@
 class Perk < ActiveRecord::Base
-	belongs_to :project, dependent: :destroy
+	belongs_to :project
 
 	belongs_to :image
 	has_many :funders
