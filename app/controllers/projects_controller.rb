@@ -108,7 +108,11 @@ class ProjectsController < ApplicationController
                               if @perk.save
                                 format.html { redirect_to '/perks/' + @perk.id.to_s + '/edit/' + @project.id.to_s }
                                 format.json {  }
+                              else
+                                 format.html { redirect_to root_path, alert: "fallo el salvado del perk" }
+                                format.json {  }
                               end
+
                             end
                            }
                           format.json { }
