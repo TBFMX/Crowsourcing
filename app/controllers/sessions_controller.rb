@@ -25,8 +25,11 @@ class SessionsController < ApplicationController
       end
       #termina variables de rol
 
-
-  		redirect_to session[:lasurl], notice: "Session iniciada"
+      if session[:lasurl]
+    		redirect_to session[:lasurl], notice: "Session iniciada"
+      else
+        redirect_to root_path, notice: "Session iniciada"
+      end
   	else
   		redirect_to root_path, alert: "Invalid user/password combination"
   	end
