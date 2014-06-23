@@ -62,7 +62,7 @@ class GalleriesController < ApplicationController
         format.html { redirect_to '/projects/galleries/' + @project2.id.to_s, notice: 'Gallery was successfully created.' }
         format.json { render :show, status: :created, location: @gallery }
       else
-        format.html { render :new }
+        format.html { render '/projects/galleries/' + @project2.id.to_s }
         format.json { render json: @gallery.errors, status: :unprocessable_entity }
       end
     end
@@ -76,7 +76,7 @@ class GalleriesController < ApplicationController
         format.html { redirect_to @gallery, notice: 'Gallery was successfully updated.' }
         format.json { render :show, status: :ok, location: @gallery }
       else
-        format.html { render :edit }
+        format.html { render '/projects/galleries/' + @project2.id.to_s }
         format.json { render json: @gallery.errors, status: :unprocessable_entity }
       end
     end
@@ -87,7 +87,7 @@ class GalleriesController < ApplicationController
   def destroy
     @gallery.destroy
     respond_to do |format|
-      format.html { redirect_to galleries_url, notice: 'Gallery was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: 'Gallery was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

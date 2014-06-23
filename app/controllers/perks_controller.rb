@@ -95,19 +95,22 @@ class PerksController < ApplicationController
                         format.html {  redirect_to url, notice: 'Perk was successfully updated.' }
                         format.json { render :show, status: :ok, location: @perk }
                       else
-                        format.html { render :edit }
-                        format.json { render json: @perk.errors, status: :unprocessable_entity }
+                        format.html { redirect_to root_path, alert: "no se guardo la imagen" }
+                        format.json {  }
                       end
                     end  
                     }
                   format.json { render :show, status: :ok, location: @perk }
                 else
-                  format.html { render :edit }
-                  format.json { render json: @perk.errors, status: :unprocessable_entity }
+                  format.html { redirect_to root_path, alert: "no se guardo el perk" }
+                  format.json {  }
                 end
               end
             }
             format.json { }
+        else
+          format.html { redirect_to root_path, alert: "no se guardo la imagen" }
+          format.json {  }
         end
       end
     else
@@ -122,7 +125,7 @@ class PerksController < ApplicationController
           format.html {  redirect_to url, notice: 'Perk was successfully updated.' }
           format.json { render :show, status: :ok, location: @perk }
         else
-            format.html { render :edit }
+            format.html { redirect_to root_path, alert: "no se guardo el perk" }
             format.json { render json: @perk.errors, status: :unprocessable_entity }
         end
       end    

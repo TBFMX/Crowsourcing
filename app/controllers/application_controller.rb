@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     #redirect_to root_url
   end
  
+  ##
   #render 500 error
   def render_error(e)
     respond_to do |f|

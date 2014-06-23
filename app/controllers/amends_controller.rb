@@ -64,41 +64,63 @@ class AmendsController < ApplicationController
   def create
     @project = params[:amend][:project_id]
     @user = params[:amend][:user]
-    @pic = params[:amend][:image]
+    @pic = params[:amend][:image_id]
 
     #hasta aqui bien  
 
     @gallery = Gallery.where("project_id = ?",@project).limit(1).map { |l| l.id }
-     puts"------------------------------------------------------"
-     puts @gallery.inspect
+     puts"-----------------galleria-------------------------------------"
+     puts "0: " + @gallery[0].to_s
+     puts "1: " + @gallery[1].to_s
      puts"------------------------------------------------------"
     
 
 
-    unless params[:image].nil?
+    unless params[:amend][:image_id].nil?
       @pics = DataFile.save(@pic)
+
     else
-      @pics = ""  
+      @pics = "" 
+      puts"---------------------imagen no recibida---------------------------------"
+      puts @pic.inspect
+      puts"------------------------------------------------------"
     end
     #no agarra el id de galery
-    @image = Image.new("galery_id" => @gallery, "image_url" => @pics)
+    @image = Image.new("galery_id" => @gallery[0].to_s, "image_url" => @pics)
     
     respond_to do |format|
       if @image.save
+        puts "--------------------------imagen-----------------------------------"
+        puts " si se guardo"
+        puts "-------------------------------------------------------------"
         format.html { 
 
           @amend = Amend.new("user_id"=>@user, "project_id" => @project, "description" => params[:amend][:description], "image_id" => @image.id)
           respond_to do |format|
             if @amend.save
-              format.html { redirect_to @amend, notice: 'Amend was successfully created.' }
+              puts "--------------------------amend-----------------------------------"
+              puts " si se guardo"
+              puts "-------------------------------------------------------------"
+              format.html { redirect_to "/projects/" + @project.to_s, notice: 'la actualizacion se registro con exito' }
               format.json { render :show, status: :created, location: @amend }
             else
-              format.html { render :new }
-              format.json { render json: @amend.errors, status: :unprocessable_entity }
+              puts "------------------amend-------------------------------------------"
+              puts " no se guardo"
+              puts "-------------------------------------------------------------"
+              format.html { redirect_to "/projects/" + @project.to_s, alert: "no se guardo la actualizacion" }
+              format.json { render json: @perk.errors, status: :unprocessable_entity }
             end
           end
         }
         format.json { render :show, status: :created, location: @amend }    
+      else
+        puts "------------imagen-------------------------------------------------"
+        puts "no se guardo"
+        puts "url = " + @pics.to_s
+        puts "objeto imagen = " + @image.inspect
+        puts "-------------------------------------------------------------"
+          format.html { redirect_to "/projects/" + @project.to_s, alert: "no se guardo la imagen" }
+          format.json { render json: @perk.errors, status: :unprocessable_entity }
       end
     end  
   end
@@ -108,11 +130,11 @@ class AmendsController < ApplicationController
   def update
     respond_to do |format|
       if @amend.update(amend_params)
-        format.html { redirect_to @amend, notice: 'Amend was successfully updated.' }
+        format.html { redirect_to "/projects/" + @project.to_s, notice: 'los cambios de guardaron con exito' }
         format.json { render :show, status: :ok, location: @amend }
       else
-        format.html { render :edit }
-        format.json { render json: @amend.errors, status: :unprocessable_entity }
+        format.html { redirect_to "/projects/" + @project.to_s, alert: "no se guardaron los cambios" }
+        format.json { render json: @perk.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -122,7 +144,7 @@ class AmendsController < ApplicationController
   def destroy
     @amend.destroy
     respond_to do |format|
-      format.html { redirect_to amends_url, notice: 'Amend was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: 'Amend was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

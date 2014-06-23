@@ -15,10 +15,10 @@
   <tbody>
     <% @comments.each do |comment| %>
       <tr aling="center">
-        <td ><%= comment.user.username %></td>
+        <td style= "background-color:#00ff00;"> usuario: <%= comment.user.username %></td>
       </tr>
       <tr aling="center">  
-        <td><%= comment.comments %></td>
+        <td> comentario: </br> <%= comment.comments %></td>
       </tr>
     <% end %>
   </tbody>

@@ -46,7 +46,7 @@ class ImagesController < ApplicationController
   def create
     @pic = params[:image][:image_url]
     puts "---------------------------------datos-imagen------------------------------------------------------"
-    puts pic.inspect
+    puts @pic.inspect
     puts "---------------------------------------------------------------------------------------------------"
 
     @gallery = Gallery.find(params[:image][:galery_id])
