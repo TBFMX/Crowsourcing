@@ -110,20 +110,29 @@ class ProjectsController < ApplicationController
                                 format.html { redirect_to '/perks/' + @perk.id.to_s + '/edit/' + @project.id.to_s }
                                 format.json {  }
                               else
-                                 format.html { redirect_to root_path, alert: "fallo el salvado del perk" }
+                                format.html { redirect_to root_path, alert: "fallo el salvado del perk" }
                                 format.json {  }
                               end
 
                             end
                            }
                           format.json { }
+                        else
+                          format.html { redirect_to root_path, alert: "fallo el update de proyecto" }
+                          format.json {  }
                         end
                       end                      
                     }
                     format.json { }
+                  else
+                    format.html { redirect_to root_path, alert: "fallo el salvado de la imagen" }
+                    format.json {  }
                   end
                 end
                }
+              format.json {  }
+            else
+              format.html { redirect_to root_path, alert: "fallo el salvado de la Galeria" }
               format.json {  }
             end
           end  

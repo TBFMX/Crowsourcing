@@ -169,9 +169,15 @@ es:
       odd: debe ser impar
       record_invalid: ! 'La validación falló: %{errors}'
       taken: ya está en uso
-      too_long: es demasiado largo (%{count} caracteres máximo)
-      too_short: es demasiado corto (%{count} caracteres mínimo)
-      wrong_length: no tiene la longitud correcta (%{count} caracteres exactos)
+      too_long:
+        one: es demasiado largo (máximo 1 caracter)
+        other: es demasiado largo (máximo %{count} caracteres)
+      too_short:
+        one: es demasiado corto (mínimo 1 caracter)
+        other: es demasiado corto (mínimo %{count} caracteres)
+      wrong_length:
+        one: longitud errónea (debe ser de 1 caracter)
+        other: longitud errónea (debe ser de %{count} caracteres)
     template:
       body: ! 'Se encontraron problemas con los siguientes campos:'
       header:
@@ -187,10 +193,10 @@ es:
   number:
     currency:
       format:
-        delimiter: .
+        delimiter: ,
         format: ! '%n %u'
         precision: 2
-        separator: ! ','
+        separator: ! '.'
         significant: false
         strip_insignificant_zeros: false
         unit: $
