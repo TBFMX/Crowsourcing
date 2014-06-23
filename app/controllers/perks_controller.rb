@@ -76,13 +76,13 @@ class PerksController < ApplicationController
       puts "----------------------------------------------"
 
       respond_to do |format|
-        if @image.save
+        if secure_save(@image)
             format.html { 
               puts "------------------------------------------------------------------"
               puts @image.id
               puts "------------------------------------------------------------------"
               respond_to do |format|
-                if @perk.save
+                if secure_save(@perk)
                   format.html { 
                     respond_to do |format|
                       if @perk.update("image_id"=> @image.id)

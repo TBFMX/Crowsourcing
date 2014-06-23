@@ -58,7 +58,7 @@ class GalleriesController < ApplicationController
     @project2 = Project.find(params[:gallery][:project_id])
 
     respond_to do |format|
-      if @gallery.save
+      if secure_save(@gallery)
         format.html { redirect_to '/projects/galleries/' + @project2.id.to_s, notice: 'Gallery was successfully created.' }
         format.json { render :show, status: :created, location: @gallery }
       else

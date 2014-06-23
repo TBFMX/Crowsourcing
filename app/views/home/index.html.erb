@@ -9,7 +9,7 @@
 			 <%= link_to "Proyecto: #{p.name}", "/projects/#{p.id}"%>
 		</div>
 		<div class="datos">
-			 <p><strong>Monetary goal: </strong><%= p.monetary_goal %></p>
+			 <p><strong>Monetary goal: </strong><%= number_to_currency( p.monetary_goal) %></p>
 			 <p><strong>Init date: </strong><%= p.init_date %></p>
 			 <p><strong>Finish date: </strong><%= p.finish_date %></p>
 		</div>

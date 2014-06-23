@@ -89,7 +89,7 @@ class AmendsController < ApplicationController
     @image = Image.new("galery_id" => @gallery[0].to_s, "image_url" => @pics)
     
     respond_to do |format|
-      if @image.save
+      if secure_save(@image)
         puts "--------------------------imagen-----------------------------------"
         puts " si se guardo"
         puts "-------------------------------------------------------------"
@@ -97,7 +97,7 @@ class AmendsController < ApplicationController
 
           @amend = Amend.new("user_id"=>@user, "project_id" => @project, "description" => params[:amend][:description], "image_id" => @image.id)
           respond_to do |format|
-            if @amend.save
+            if secure_save(@amend)
               puts "--------------------------amend-----------------------------------"
               puts " si se guardo"
               puts "-------------------------------------------------------------"

@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
     puts "--------------------------"
 
     respond_to do |format|
-      if @comment.save
+      if secure_save(@comment) 
         format.html { redirect_to "/projects/" + params[:comment][:project_id].to_s, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else

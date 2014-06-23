@@ -51,7 +51,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
      respond_to do |format|
-      if @video.save
+      if secure_save(@video)
         format.html { redirect_to @video, notice: 'Video was successfully created.' }
         format.json { render :show, status: :created, location: @video }
       else

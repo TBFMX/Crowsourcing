@@ -19,6 +19,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    if params[:id].nil?
+      redirect_to root_path
+    end
     @image = Image.find(@project.image_id)
     @perks = Perk.where("project_id = ?",@project.id).order("price")
     @permiso = check_propiety(@project)
@@ -72,7 +75,7 @@ class ProjectsController < ApplicationController
       puts @pics.inspect
     puts "--------------------------------------------------" 
     respond_to do |format|
-      if @project.save
+      if secure_save(@project)
         format.html { 
           #saco la id del proyecto
           @projects = Project.find(@project)
@@ -86,7 +89,7 @@ class ProjectsController < ApplicationController
           puts @gallery.inspect
           puts "------------------------------------------------------"
           respond_to do |format|
-            if @gallery.save
+            if secure_save(@gallery)
               format.html {
                 @galleries = Gallery.find(@gallery)
                 @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
@@ -95,7 +98,7 @@ class ProjectsController < ApplicationController
                 puts "----------------------------------------------------"
                 
                 respond_to do |format|
-                  if @image.save
+                  if secure_save(@image)
                     format.html { 
                       respond_to do |format|
                         if @projects.update("image_id" => @image.id)

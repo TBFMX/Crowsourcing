@@ -57,7 +57,7 @@ class ImagesController < ApplicationController
     @image = Image.new("image_url" => @pics, "galery_id" => params[:image][:galery_id])
 
     respond_to do |format|
-      if @image.save
+      if secure_save(@image)
         format.html { redirect_to '/galleries/' + params[:image][:galery_id].to_s, notice: 'Image was successfully created.' }
         format.json { render :show, status: :created, location: @image }
       else
