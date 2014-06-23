@@ -3,13 +3,14 @@ class ProjectsController < ApplicationController
   #before_action :autorizado,  only: [ :edit, :update, :destroy]
   skip_before_action :authorize, only:[:show, :index]
   include Porta
+  before_action :check_admin, only: [:show]
 
   # GET /projects
   # GET /projects.json
   def index
-    #if params[:id].nil?
-    #  redirect_to root_path
-    #end 
+    if params[:id].nil?
+      redirect_to root_path
+    end 
     @projects = Project.all
     @permiso = check_propiety(@project)
    
@@ -39,12 +40,12 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-     @user = session[:user_id]
+    @user = session[:user_id]
 
-     puts"------------------------------------------------------"
-     puts @user.inspect
-     puts"------------------------------------------------------"
-     @permiso = check_propiety(@project)
+    puts"------------------------------------------------------"
+    puts @user.inspect
+    puts"------------------------------------------------------"
+    @permiso = check_propiety(@project)
     unless @permiso 
       redirect_to root_path
     end
@@ -56,11 +57,11 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     puts "-------------------Proyecto---------------------------"
       puts @project.inspect
-     puts "----------------------------------------------"
-     @pic = params[:project][:image_id]
+      puts "----------------------------------------------"
+      @pic = params[:project][:image_id]
     puts "-------------------Pic---------------------------"
       puts @pic.inspect
-     puts "----------------------------------------------"
+    puts "----------------------------------------------"
 
     unless @pic.nil?
       @pics = DataFile.save(@pic,params[:project][:id],"principal")
@@ -122,16 +123,10 @@ class ProjectsController < ApplicationController
                     format.json { }
                   end
                 end
-
-
-
                }
               format.json {  }
             end
-          end
-
-
-          
+          end  
           }
         format.json { render :show, status: :created, location: @project }
       else
@@ -158,7 +153,6 @@ class ProjectsController < ApplicationController
         format.html {
           unless @pic.nil?
             @projects = Project.find(@project)
-            
             puts "-------------------Pics---------------------------"
               puts @pics.inspect
             puts "--------------------------------------------------"
@@ -177,7 +171,6 @@ class ProjectsController < ApplicationController
                     puts "--------------------Imagen--------------------------"
                     puts @image.inspect
                     puts "----------------------------------------------------"
-                    
                     respond_to do |format|
                       if @image.save
                         format.html { 
@@ -211,7 +204,6 @@ class ProjectsController < ApplicationController
       end
     end
   end
-
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
@@ -221,7 +213,6 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 
 
   private
@@ -243,5 +234,6 @@ class ProjectsController < ApplicationController
         return false
       end 
     end
-=end    
+=end  
+
 end

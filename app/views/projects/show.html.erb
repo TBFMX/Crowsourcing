@@ -6,6 +6,9 @@
         <td><%= link_to 'Edit', edit_project_path(@project) %></td>
         <td><%= link_to 'Agregar Perk', '/perks/new/' + @project.id.to_s %></td>
     <% end %>
+    <% if @iam %>
+        <td><%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
 	<div class="show_proyects">
 		<div class="titulo">
 			 <strong>Nombre del proyecto: </strong><%= @project.name %>
