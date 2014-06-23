@@ -3,7 +3,7 @@
   <% if session[:uname] %>
   	<p> estas conectado como <%= session[:uname] %>  |   <%= button_to 'Logout', logout_path, method: :delete %></p>
   <% else %>
-  	<p> estas conectado como visitante  </p>	
+  	<p> estas conectado como visitante  | <%= link_to "Entrar", login_url %>	 </p>
   <% end %>
   </br>
    <% if session[:uname] %>
