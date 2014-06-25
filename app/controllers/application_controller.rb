@@ -50,14 +50,21 @@ class ApplicationController < ActionController::Base
     rescue ActiveRecord::RecordNotFound    
       # handle not found error
       logger.error "no se encontro el registro que se solicito"
+      puts "no se encontro el registro que se solicito"
       return false
     rescue ActiveRecord::ActiveRecordError
       # handle other ActiveRecord errors
       logger.error ("hubo un error en el ActiveRecord" + logger.debug)
-          rescue # StandardError
+      puts "hubo un error en el ActiveRecord" + logger.debug
+      return false
+    rescue # StandardError
       # handle most other errors
+      puts "hubo un error no identificado"
+      return false
     rescue Exception
       # handle everything else
+      puts "hubo una excepcion no identificada"
+      return false
     end
   end
   def var_verify(variable)

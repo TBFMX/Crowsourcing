@@ -22,13 +22,23 @@ class ProjectsController < ApplicationController
     if params[:id].nil?
       redirect_to root_path
     end
-    @image = Image.find(@project.image_id)
+    if @project.image_id
+      @image = Image.find(@project.image_id)
+    end  
+
     @perks = Perk.where("project_id = ?",@project.id).order("price")
     @permiso = check_propiety(@project)
     puts "---------permiso--------------------------------"
     puts @permiso
     puts "-----------------------------------------"
     add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+
+    if  Funder.where("project_id = ?", @project.id).count <= 0
+      @limpio = true
+    else
+      @limpio = false
+    end    
+
   end
 
   # GET /projects/new
@@ -57,6 +67,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    session[:url_to_return] = ""
     @project = Project.new(project_params)
     puts "-------------------Proyecto---------------------------"
       puts @project.inspect
@@ -76,6 +87,7 @@ class ProjectsController < ApplicationController
     puts "--------------------------------------------------" 
     respond_to do |format|
       if secure_save(@project)
+
         format.html { 
           #saco la id del proyecto
           @projects = Project.find(@project)
@@ -92,46 +104,68 @@ class ProjectsController < ApplicationController
             if secure_save(@gallery)
               format.html {
                 @galleries = Gallery.find(@gallery)
-                @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
-                puts "--------------------Imagen--------------------------"
-                puts @image.inspect
-                puts "----------------------------------------------------"
-                
-                respond_to do |format|
-                  if secure_save(@image)
-                    format.html { 
-                      respond_to do |format|
-                        if @projects.update("image_id" => @image.id)
-                          format.html { 
-                            #creo un nuevo perk
-                            @perk = Perk.new("project_id"=>@projects.id)
-                            puts "--------------------Perk--------------------------"
-                            puts @perk.inspect
-                            puts "--------------------------------------------------"
-                            respond_to do |format|
-                              if @perk.save
-                                format.html { redirect_to '/perks/' + @perk.id.to_s + '/edit/' + @project.id.to_s }
-                                format.json {  }
-                              else
-                                format.html { redirect_to root_path, alert: "fallo el salvado del perk" }
-                                format.json {  }
-                              end
+                unless @pic.nil?
+                  puts "pase la validacion de pic"
+                    @image = Image.new("galery_id" => @galleries.id, "image_url" => @pics)
+                    puts "--------------------Imagen--------------------------"
+                    puts @image.inspect
+                    puts "----------------------------------------------------"
+                    
+                    respond_to do |format|
+                      if secure_save(@image)
+                        puts "entre a imagen"
+                        format.html { 
+                          respond_to do |format|
+                            if @projects.update("image_id" => @image.id)
+                              format.html { 
+                                #creo un nuevo perk
+                                @perk = Perk.new("project_id"=>@projects.id)
+                                puts "--------------------Perk--------------------------"
+                                puts @perk.inspect
+                                puts "--------------------------------------------------"
+                                respond_to do |format|
+                                  if @perk.save
+                                    format.html { redirect_to '/perks/' + @perk.id.to_s + '/edit/' + @project.id.to_s }
+                                    format.json {  }
+                                  else
+                                    format.html { redirect_to root_path, alert: "fallo el salvado del perk" }
+                                    format.json {  }
+                                  end
 
+                                end
+                               }
+                              format.json { }
+                            else
+                              format.html { redirect_to root_path, alert: "fallo el update de proyecto" }
+                              format.json {  }
                             end
-                           }
-                          format.json { }
-                        else
-                          format.html { redirect_to root_path, alert: "fallo el update de proyecto" }
-                          format.json {  }
-                        end
-                      end                      
-                    }
-                    format.json { }
-                  else
-                    format.html { redirect_to root_path, alert: "fallo el salvado de la imagen" }
-                    format.json {  }
+                          end                      
+                        }
+                        format.json { }
+                      else
+                        puts "entre a imagen"
+                        format.html { redirect_to root_path, alert: "fallo el salvado de la imagen" }
+                        format.json {  }
+                      end
+                    end
+                else
+                  puts "voy sin imagen"
+                  @perk = Perk.new("project_id"=>@projects.id)
+                  puts "--------------------Perk--------------------------"
+                  puts @perk.inspect
+                  puts "--------------------------------------------------"
+                  respond_to do |format|
+                    if @perk.save
+                      puts "grabe el perk"
+                      format.html { redirect_to '/perks/' + @perk.id.to_s + '/edit/' + @project.id.to_s }
+                      format.json {  }
+                    else
+                      puts "grabe el perk"
+                      format.html { redirect_to root_path, alert: "fallo el salvado del perk" }
+                      format.json {  }
+                    end
                   end
-                end
+                end    
                }
               format.json {  }
             else

@@ -33,6 +33,7 @@ class PerksController < ApplicationController
     @gallery = Gallery.where("project_id = ?",@project)
     @permiso = check_propiety(@project)
     unless @permiso 
+      puts "no me dieron permiso" 
       redirect_to root_path
     end
   end
@@ -47,7 +48,8 @@ class PerksController < ApplicationController
       puts @gallery.inspect
     puts "-------------------------------------------------"
     @permiso = check_propiety(@project2)
-    unless @permiso 
+    unless @permiso
+      puts "no me dieron permiso" 
       redirect_to root_path
     end
   end
@@ -83,7 +85,9 @@ class PerksController < ApplicationController
               puts "------------------------------------------------------------------"
               respond_to do |format|
                 if secure_save(@perk)
-                  format.html { 
+                  format.html {
+                    puts "-------------------------ya guarde el perk-----------------------------------------"
+
                     respond_to do |format|
                       if @perk.update("image_id"=> @image.id)
                         if session[:url_to_return].blank?
@@ -92,24 +96,25 @@ class PerksController < ApplicationController
                           url = session[:url_to_return]
                           session[:url_to_return] = ""
                         end  
-                        format.html {  redirect_to url, notice: 'Perk was successfully updated.' }
+                        format.html {  redirect_to url, notice: 'el Perk se a creado exitosamente.' }
                         format.json { render :show, status: :ok, location: @perk }
                       else
-                        format.html { redirect_to root_path, alert: "no se guardo la imagen" }
+                        format.html { redirect_to root_path, notice: "sucedio un error al registrar el perk, intente de nuevo en 5 minutos" }
                         format.json {  }
                       end
                     end  
                     }
                   format.json { render :show, status: :ok, location: @perk }
                 else
-                  format.html { redirect_to root_path, alert: "no se guardo el perk" }
+                  puts "-------------------------ya guarde el perk-----------------------------------------"
+                  format.html { redirect_to root_path, notice: "no se guardo el perk" }
                   format.json {  }
                 end
               end
             }
             format.json { }
         else
-          format.html { redirect_to root_path, alert: "no se guardo la imagen" }
+          format.html { redirect_to root_path, notice: "no se guardo la imagen" }
           format.json {  }
         end
       end

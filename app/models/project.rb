@@ -4,7 +4,11 @@ class Project < ActiveRecord::Base
 	has_many :images	
 	has_many :galeries, dependent: :destroy
 	validates :name, :monetary_goal, presence:true
-	validates :monetary_goal, numericality: {greater_than_or_equal_to: 0.01}
+	#validates :monetary_goal, numericality: {greater_than_or_equal_to: 0.01}
+	validates_length_of :name, :minimum => 5, :maximum => 17, :allow_blank => true
+
+
+	#humanized_money_accessor :monetary_goal
 	#validates_size_of :image_id, maximum: 60.kilobytes, message: "el tamaño de la imagen no deve exceder los 60KB"  
 	# validate :picture_size_validation, :if => "image_id?"  
 

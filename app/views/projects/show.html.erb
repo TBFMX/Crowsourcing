@@ -3,11 +3,11 @@
 <%= render partial: '/projects/menu', locals: {project: @project} %>
 
 	<% if @permiso %>
-        <td><%= link_to 'Edit', edit_project_path(@project) %></td>
+        <td><%= link_to 'Editar', edit_project_path(@project) %></td>
         <td><%= link_to 'Agregar Perk', '/perks/new/' + @project.id.to_s %></td>
     <% end %>
-    <% if @iam %>
-        <td><%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if @iam && @limpio %>
+        <td><%= link_to 'Borrar proyecto', @project, method: :delete, data: { confirm: 'estas seguro?' } %></td>
     <% end %>
 	<div class="show_proyects">
 		<div class="titulo">
@@ -18,7 +18,9 @@
 			 <p><strong>Init date: </strong><%= @project.init_date %></p>
 			 <p><strong>Finish date: </strong><%= @project.finish_date %></p>
 		</div>
-		<img src="<%= @image.image_url %>">
+		<% unless @image.nil? %>
+			<img src="<%= @image.image_url %>">
+		<% end %>
 	</div>
 
 <%= render partial: '/projects/status', locals: {project: @project} %>

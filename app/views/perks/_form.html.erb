@@ -1,3 +1,34 @@
+            <!--aqui-->
+            <script type='text/javascript'>
+           
+            function validateFiles(inputFile) {
+              var maxExceededMessage = "El Archivo excede el limite pérmitido (60 KB)";
+              var extErrorMessage = "Solo se aceptan extenciones: .jpg, .jpeg, .gif or .png ";
+              var allowedExtension = ["jpg", "jpeg", "gif", "png"];
+             
+              var extName;
+              var maxFileSize = $(inputFile).data('max-file-size');
+              var sizeExceeded = false;
+              var extError = false;
+             
+              $.each(inputFile.files, function() {
+                if (this.size && maxFileSize && this.size > parseInt(maxFileSize)) {sizeExceeded=true;};
+                extName = this.name.split('.').pop();
+                if ($.inArray(extName, allowedExtension) == -1) {extError=true;};
+              });
+              if (sizeExceeded) {
+                window.alert(maxExceededMessage);
+                $(inputFile).val('');
+              };
+             
+              if (extError) {
+                window.alert(extErrorMessage);
+                $(inputFile).val('');
+              };
+            }
+            </script>
+            <!-- aqui-->
+
 <%= form_for(@perk) do |f| %>
   <% if @perk.errors.any? %>
     <div id="error_explanation">
@@ -25,7 +56,7 @@
   </div>
   <div class="field">
     <%= f.label :price %><br>
-    <%= f.text_field :price %>
+    <%= f.text_field :price, :step => 0.01%>
   </div>
   <div class="field">
     <%#= f.label :project_id %><br>
@@ -33,7 +64,7 @@
   </div>
   <div class="field">
     <%= f.label :image_id %><br>
-    <%= f.file_field :image_id %>
+    <%= f.file_field :image_id ,:onchange =>"validateFiles(this);",:data => {:max_file_size => 60.kilobytes} %>
     <%# unless :image_id.nil? %>
       <p><%#= perk.image.image_url %></p>
     <%# end %> 
