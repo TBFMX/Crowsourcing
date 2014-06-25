@@ -4,7 +4,7 @@ class Perk < ActiveRecord::Base
 	belongs_to :image
 	has_many :funders
 
-	validates_length_of :title, :minimum => 4, :maximum => 17, :allow_blank => true
+	validates_length_of :title,  :maximum => 17, :allow_blank => true, notice: "el titulo excede los 17 caracteres"
 
 	#humanized_money_accessor :price
 

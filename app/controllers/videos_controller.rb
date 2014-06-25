@@ -30,6 +30,9 @@ class VideosController < ApplicationController
     @gallery3 = Gallery.find(params[:id])
     @project = Project.find(@gallery3.project_id)
     @permiso = check_propiety(@project)
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+    add_breadcrumb I18n.t("breadcrumbs.galleries"), '/projects/galleries/' + @project.id.to_s 
+    add_breadcrumb I18n.t("breadcrumbs.videos"), '/videos/new/' + @gallery3.id.to_s 
     unless @permiso 
       redirect_to root_path
     end

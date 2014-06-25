@@ -15,7 +15,7 @@
 		<p><strong>Descripción:</strong></p>
 		<p><%= perk.description %></p>
 		</br>
-		<p><strong>Precio :</strong><%= perk.price %></p>
+		<p><strong>Precio :</strong><%= number_to_currency(perk.price) %></p>
 		<!-- hay que validar la existencia del id y de la url -->
 		<% unless perk.image_id.nil? || perk.image_id.blank? %>
 			<% @image2 = Image.find(perk.image_id)%>

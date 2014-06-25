@@ -26,6 +26,25 @@
                 $(inputFile).val('');
               };
             }
+            function validateStrings(text) {
+              var maxExceededMessage = "El texto no debe exceder los 17 caracteres el texto es de:" + text.value.length + "caracteres" ;
+              
+              //var maxSize = $(text).data('max-file-size');
+              var maxSize = 17;
+              var sizeExceeded = false;
+              var extError = false;
+
+             
+           
+                if (text.value.length && maxSize && text.value.length > parseInt(maxSize)) {sizeExceeded=true;};
+             
+                
+              if (sizeExceeded) {
+                window.alert(maxExceededMessage);
+                //$(text).val('');
+              };
+             
+            }
             </script>
             <!-- aqui-->
 
@@ -44,11 +63,11 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title ,:onchange =>"validateStrings(this);",:data => {:max_file_size => 17}%>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description ,:onchange =>"validateStrings(this);",:data => {:max_file_size => 57} %>
   </div>
   <div class="field">
     <%= f.label :delivery_date %><br>

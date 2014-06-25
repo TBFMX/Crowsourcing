@@ -5,16 +5,16 @@ es:
     nosotros: Nosotros
     productos: Productos
     clientes: Clientes
-    delta: Arandelas Delta Protekt
-    ino316: Arandelas de Acero Inoxidable 316L
-    ino254: Arandelas de Acero Inoxidable 245 SMO
-    especiales: Arandelas Especiales
     comments: 'Comentarios'
     users: 'User'
     amends: 'Actualizaciones'
     galleries: 'Galerias'
     funders: 'Socios'
-    
+    images: 'Imagen'
+    nimage: 'Nueva Imagen'
+    videos: 'Video'
+    nvideo: 'Nuevo Video'
+
 
   activerecord:
       attributes:

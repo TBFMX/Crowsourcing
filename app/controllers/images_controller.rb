@@ -27,7 +27,7 @@ class ImagesController < ApplicationController
     @project = Project.find(@gallery.project_id)
     add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
         add_breadcrumb I18n.t("breadcrumbs.galleries"), '/projects/galleries/' + @project.id.to_s 
-    add_breadcrumb I18n.t("breadcrumbs.images"), '/images/new/' + @project.id.to_s 
+    add_breadcrumb I18n.t("breadcrumbs.nimage"), '/images/new/' + @gallery.id.to_s 
     @image = Image.new("galery_id" => params[:id])
     @permiso = check_propiety(@project)
     unless @permiso 
@@ -52,8 +52,10 @@ class ImagesController < ApplicationController
     @gallery = Gallery.find(params[:image][:galery_id])
     @project2 = Project.find(@gallery.project_id)
     @gallery2 = Gallery.find(@gallery)
-    @pics = DataFile.save(@pic,@project2.name,@gallery2.title)
 
+    unless @pic.blank?
+      @pics = DataFile.save(@pic,@project2.name,@gallery2.title)
+    end
     @image = Image.new("image_url" => @pics, "galery_id" => params[:image][:galery_id])
 
     respond_to do |format|

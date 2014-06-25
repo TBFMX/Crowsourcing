@@ -9,9 +9,13 @@ class GalleriesController < ApplicationController
     if params[:id].nil?
       redirect_to root_path
     end 
+
     @galleries = Gallery.where("project_id" => params[:id])
     @project = Project.find(params[:id])
+    @project2 = Project.find(@project)
     @permiso = check_propiety(@project)
+    add_breadcrumb @project.name.to_s, '/projects/' + @project.id.to_s
+        add_breadcrumb I18n.t("breadcrumbs.galleries"), '/projects/galleries/' + @project.id.to_s 
   end
 
   # GET /galleries/1
