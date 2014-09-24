@@ -58,13 +58,13 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.4)
     multi_json (1.10.1)
-    mysql2 (0.3.16)
     paypal-sdk-core (0.2.8)
       multi_json (~> 1.0)
       xml-simple
     paypal-sdk-rest (0.6.1)
       paypal-sdk-core (~> 0.2.8)
       uuidtools (~> 2.1)
+    pg (0.17.1)
     polyglot (0.3.5)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -133,8 +133,8 @@ DEPENDENCIES
   exception_notification
   jbuilder (~> 2.0)
   jquery-rails
-  mysql2
   paypal-sdk-rest
+  pg
   rails (= 4.1.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

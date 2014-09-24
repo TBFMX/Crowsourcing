@@ -44,6 +44,6 @@ gem 'exception_notification'
 gem "breadcrumbs_on_rails"
 gem 'paypal-sdk-rest'
 group :production do
-	gem 'mysql2'
+	gem 'pg'
 end
 
